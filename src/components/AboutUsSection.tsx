@@ -63,14 +63,16 @@ export default function AboutUsSection() {
                 code, and the future impact.
               </p>
 
-              <h3 className="text-2xl md:text-[32px] font-bold mt-8 text-gray-900">
-                Our DNA
-              </h3>
+              <div className="bg-white/60 rounded-3xl p-8 md:py-12 shadow-xl/20 mt-8 space-y-4">
+                <h3 className="text-2xl md:text-[32px] font-bold text-gray-900">
+                  Our DNA
+                </h3>
 
-              <div className="text-[21px] font-semibold leading-relaxed space-y-3 text-black/90">
-                <p>You own everything — models, pipelines, data flows</p>
-                <p>We move fast, iterate, and keep it transparent.</p>
-                <p>Ethical, secure, and sustainable by design.</p>
+                <div className="text-[21px] font-semibold leading-relaxed space-y-3 text-black/90">
+                  <p>You own everything — models, pipelines, data flows</p>
+                  <p>We move fast, iterate, and keep it transparent.</p>
+                  <p>Ethical, secure, and sustainable by design.</p>
+                </div>
               </div>
             </div>
 
