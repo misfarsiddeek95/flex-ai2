@@ -103,7 +103,7 @@ export default function AboutUsSection() {
               />
 
               {/* 💡 WATERMARK BLOCKER (Mask) */}
-              <div className="absolute bottom-0 right-0 md:bottom-0 md:right-0 w-80 h-16 bg-white z-30" />
+              <div className="absolute bottom-0 right-0 md:bottom-0 md:right-0 w-80 md:w-55 h-16 bg-white z-30" />
             </div>
           </div>
         </div>
