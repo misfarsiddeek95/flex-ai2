@@ -104,7 +104,7 @@ export default function WhoWeBuildForSection() {
     <section ref={sectionRef} className="relative bg-[#F5F5F7] overflow-hidden">
       {/* Spline canvas (Event layer) */}
       <div
-        className="absolute inset-0 z-10 w-full h-full"
+        className="absolute hidden md:block inset-0 z-10 w-full h-full"
         onMouseMove={handleMouseMove}
         onMouseLeave={() => setHoveredCard(null)}
       >

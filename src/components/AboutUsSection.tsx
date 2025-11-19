@@ -75,10 +75,7 @@ export default function AboutUsSection() {
             </div>
 
             {/* Right side image placeholder (SPLINE) */}
-            <div
-              // 💡 Changes: Removed bg-gray-200, added relative, and overflow-hidden for the fade/masking
-              className="relative w-full aspect-video md:aspect-auto h-[300px] md:h-full rounded-lg flex items-center justify-center overflow-hidden"
-            >
+            <div className="relative w-full md:w-full h-[300px] md:h-full rounded-lg flex items-center justify-center overflow-hidden">
               {inView && (
                 <Suspense
                   fallback={
@@ -88,29 +85,15 @@ export default function AboutUsSection() {
                   }
                 >
                   <Spline
-                    // 💡 Adjustment: Applied slight scaling to fit more of the character
-                    className="w-full h-full origin-bottom scale-[0.85]"
+                    className="w-full h-full origin-bottom scale-110 md:scale-90"
                     scene="https://prod.spline.design/lPFhmjX09AKt3iES/scene.splinecode"
                   />
                 </Suspense>
               )}
-              <style jsx>{`
-                .relative::after {
-                  content: "";
-                  position: absolute;
-                  bottom: 0;
-                  right: 100;
-                  width: 15%; /* Adjust based on logo size; test and increase if needed */
-                  height: 60px; /* Adjust based on logo size */
-                  background-color: #fff; /* Matches your section background */
-                  z-index: 20; /* Ensure it's above the Spline content */
-                }
-              `}</style>
 
               {/* 💡 INTERACTIVE FRAME (Fade Overlay) */}
-              {/* This gradient covers the clipped area with a soft white fade, making it look intentional. */}
               <div
-                className="absolute inset-x-0 bottom-0 h-1/4 z-[20] pointer-events-none"
+                className="absolute inset-x-0 bottom-0 h-1/4 z-20 pointer-events-none"
                 style={{
                   background:
                     "linear-gradient(to top, #ffffff 0%, rgba(255, 255, 255, 0) 100%)",
@@ -118,14 +101,11 @@ export default function AboutUsSection() {
               />
 
               {/* 💡 WATERMARK BLOCKER (Mask) */}
-              {/* This small white div covers the "Built with Spline" label in the bottom right corner. */}
-              <div className="absolute bottom-0 right-0 w-24 h-6 bg-white z-[30]" />
+              <div className="absolute bottom-0 right-0 md:bottom-0 md:right-0 w-80 h-16 bg-white z-30" />
             </div>
           </div>
         </div>
       </section>
-      {/* Wave positioned outside the banner to overlap next section */}
-      {/* ... (commented out JSX) */}
     </>
   );
 }
