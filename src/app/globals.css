@@ -1,0 +1,464 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #1a1a1a;
+}
+
+body {
+  font-family: var(--font-alpino), ui-sans-serif, system-ui, sans-serif;
+  background: var(--background);
+  color: var(--foreground);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-satoshi), ui-sans-serif, system-ui, sans-serif;
+}
+
+/* Float Animation */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px) scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-15px) scale(1.03);
+    opacity: 0.95;
+  }
+}
+
+/* Drift Animation */
+@keyframes drift {
+  0%,
+  100% {
+    transform: translateX(0px);
+  }
+  25% {
+    transform: translateX(-10px);
+  }
+  75% {
+    transform: translateX(10px);
+  }
+}
+
+.animate-float {
+  animation: float 7s ease-in-out infinite, drift 5s ease-in-out infinite;
+}
+
+/* AI Highlight Text */
+.ai-statement-text {
+  background-image: linear-gradient(
+      100deg,
+      transparent 20%,
+      rgba(139, 92, 246, 0.4) 50%,
+      transparent 80%
+    ),
+    linear-gradient(135deg, #06b6d4 0%, #8b5cf6 50%, #fb923c 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  background-size: 200% auto, 200% auto;
+  background-position: -100% 0, 200% 0;
+  background-repeat: no-repeat;
+}
+
+/* === FIXED: Gradient Text Animation (No IDE warnings) === */
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-gradient {
+  animation: gradient-shift 8s linear infinite;
+}
+
+@keyframes shineSweep {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Rich Text Content Styles */
+.rich-text-content {
+  /* Headings */
+  h1 {
+    font-family: var(--font-satoshi), ui-sans-serif, system-ui, sans-serif;
+    font-size: 48px;
+    line-height: 56px;
+    color: #1a1a1a;
+    font-weight: 700;
+    margin-top: 32px;
+    margin-bottom: 16px;
+    letter-spacing: 0px;
+  }
+
+  h2 {
+    font-family: var(--font-satoshi), ui-sans-serif, system-ui, sans-serif;
+    font-size: 40px;
+    line-height: 48px;
+    color: #1a1a1a;
+    font-weight: 700;
+    margin-top: 28px;
+    margin-bottom: 14px;
+    letter-spacing: 0px;
+  }
+
+  h3 {
+    font-family: var(--font-satoshi), ui-sans-serif, system-ui, sans-serif;
+    font-size: 32px;
+    line-height: 40px;
+    color: #1a1a1a;
+    font-weight: 700;
+    margin-top: 24px;
+    margin-bottom: 12px;
+    letter-spacing: 0px;
+  }
+
+  h4 {
+    font-family: var(--font-satoshi), ui-sans-serif, system-ui, sans-serif;
+    font-size: 24px;
+    line-height: 32px;
+    color: #1a1a1a;
+    font-weight: 700;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    letter-spacing: 0px;
+  }
+
+  h5 {
+    font-family: var(--font-satoshi), ui-sans-serif, system-ui, sans-serif;
+    font-size: 21px;
+    line-height: 28px;
+    color: #1a1a1a;
+    font-weight: 700;
+    margin-top: 16px;
+    margin-bottom: 8px;
+    letter-spacing: 0px;
+  }
+
+  h6 {
+    font-family: var(--font-satoshi), ui-sans-serif, system-ui, sans-serif;
+    font-size: 18px;
+    line-height: 24px;
+    color: #1a1a1a;
+    font-weight: 700;
+    margin-top: 16px;
+    margin-bottom: 8px;
+    letter-spacing: 0px;
+  }
+
+  /* Paragraphs */
+  p {
+    font-family: var(--font-alpino), ui-sans-serif, system-ui, sans-serif;
+    font-size: 18px;
+    line-height: 32px;
+    color: #1a1a1a;
+    margin-bottom: 24px;
+    letter-spacing: 0px;
+  }
+
+  /* Strong and Bold */
+  strong,
+  b {
+    font-weight: 700;
+  }
+
+  /* Emphasis and Italic */
+  em,
+  i {
+    font-style: italic;
+  }
+
+  /* Images */
+  img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    margin: 32px 0;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Code Blocks */
+  pre {
+    background-color: #f5f5f7;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 16px;
+    margin: 24px 0;
+    overflow-x: auto;
+  }
+
+  pre code {
+    font-family: "Courier New", Courier, monospace;
+    font-size: 14px;
+    line-height: 24px;
+    color: #1a1a1a;
+    background: transparent;
+    padding: 0;
+  }
+
+  /* Inline Code */
+  code {
+    font-family: "Courier New", Courier, monospace;
+    font-size: 16px;
+    background-color: #f5f5f7;
+    color: #c33c00;
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+
+  /* Lists */
+  ul,
+  ol {
+    font-family: var(--font-alpino), ui-sans-serif, system-ui, sans-serif;
+    font-size: 18px;
+    line-height: 32px;
+    color: #1a1a1a;
+    margin: 16px 0;
+    padding-left: 24px;
+  }
+
+  ul li,
+  ol li {
+    margin: 8px 0;
+  }
+
+  ul {
+    list-style-type: disc;
+  }
+
+  ol {
+    list-style-type: decimal;
+  }
+
+  /* Nested Lists */
+  ul ul,
+  ol ul {
+    margin-top: 8px;
+    margin-bottom: 8px;
+  }
+
+  ul ol,
+  ol ol {
+    margin-top: 8px;
+    margin-bottom: 8px;
+  }
+
+  /* Blockquotes */
+  blockquote {
+    border-left: 4px solid;
+    border-image: linear-gradient(to bottom, #42a5f5, #7e57c2) 1;
+    padding-left: 24px;
+    margin: 32px 0;
+    font-family: var(--font-alpino), ui-sans-serif, system-ui, sans-serif;
+    font-size: 21px;
+    line-height: 36px;
+    font-style: italic;
+    color: #616161;
+  }
+
+  /* Links */
+  a {
+    background: linear-gradient(100.7deg, #42a5f5 5.16%, #7e57c2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    position: relative;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  /* Videos */
+  video {
+    max-width: 100%;
+    border-radius: 12px;
+    margin: 32px 0;
+  }
+
+  /* Horizontal Rule */
+  hr {
+    border: none;
+    border-top: 1px solid #e0e0e0;
+    margin: 32px 0;
+  }
+
+  /* Tables (if needed) */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 24px 0;
+  }
+
+  table th,
+  table td {
+    border: 1px solid #e0e0e0;
+    padding: 12px;
+    text-align: left;
+  }
+
+  table th {
+    background-color: #f5f5f7;
+    font-weight: 700;
+  }
+}
+
+/* Responsive adjustments for rich text */
+@media (max-width: 768px) {
+  .rich-text-content {
+    h1 {
+      font-size: 32px;
+      line-height: 40px;
+    }
+
+    h2 {
+      font-size: 28px;
+      line-height: 36px;
+    }
+
+    h3 {
+      font-size: 24px;
+      line-height: 32px;
+    }
+
+    h4 {
+      font-size: 21px;
+      line-height: 28px;
+    }
+
+    h5,
+    h6 {
+      font-size: 18px;
+      line-height: 24px;
+    }
+
+    p {
+      font-size: 16px;
+      line-height: 28px;
+    }
+
+    blockquote {
+      font-size: 18px;
+      line-height: 32px;
+    }
+  }
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Contact Modal Enhancements */
+.contact-modal-backdrop {
+  backdrop-filter: blur(8px);
+}
+
+/* Smooth focus transitions for form inputs */
+input:focus,
+textarea:focus {
+  transform: translateY(-1px);
+}
+
+/* Custom scrollbar for modal (if content overflows) */
+.contact-modal-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.contact-modal-content::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.contact-modal-content::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+.contact-modal-content::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Footer Enhancements */
+footer {
+  position: relative;
+}
+
+/* Smooth gradient animation for footer orbs */
+@keyframes float-slow {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(20px, -20px) scale(1.05);
+  }
+}
+
+footer .absolute.blur-3xl {
+  animation: float-slow 20s ease-in-out infinite;
+}
+
+footer .absolute.blur-3xl:nth-child(2) {
+  animation-delay: -10s;
+  animation-direction: reverse;
+}
+
+/* Footer link hover effect */
+footer a:not(.group) {
+  position: relative;
+}
+
+footer a:not(.group)::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(to right, #42a5f5, #7e57c2);
+  transition: width 0.3s ease;
+}
+
+footer a:not(.group):hover::after {
+  width: 100%;
+}
+
+/* Social icon gradient on hover */
+footer .group svg path {
+  transition: fill 0.3s ease;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  footer .backdrop-blur-sm {
+    backdrop-filter: blur(8px);
+  }
+}
