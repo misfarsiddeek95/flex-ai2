@@ -16,7 +16,7 @@ export default function HeroBanner() {
       <div className="absolute inset-0 bg-black/50 z-1"></div>
 
       {/* 2. ADDED pb-24 md:pb-32 to the text wrapper */}
-      <div className="relative z-10 pb-24 md:pb-32">
+      {/* <div className="relative z-10 pb-24 md:pb-32">
         <h1 className="text-white text-4xl md:text-6xl font-bold leading-tight mb-4">
           <TextType
             text={[
@@ -32,7 +32,7 @@ export default function HeroBanner() {
         <p className="text-white text-lg md:text-xl font-medium opacity-90">
           From Vision to Reality. Custom AI That&apos;s Truly Yours
         </p>
-      </div>
+      </div> */}
     </div>
   );
 }
