@@ -17,31 +17,34 @@ const Spline = dynamic(() => import("@splinetool/react-spline"), {
 // Card data
 const cardData = [
   {
-    title: "Health-tech",
+    title: "Health-Tech",
     description:
-      "Companies wanting predictions, diagnostics and smarter care paths.",
+      "We help hospitals and clinics understand patient needs and make workflows easier and safer.",
   },
   {
-    title: "Financial Institutions",
-    description: "tired of one-size-fits-all fraud / risk tools.",
-  },
-  {
-    title: "E-Commerce brands",
-    description: "Yearning for personalization that feels human.",
-  },
-  {
-    title: "Manufacturers",
+    title: "FinTech / Banking / Insurance",
     description:
-      "transforming processes, reducing downtime, integrating vision systems.",
+      "We help teams spot fraud, assess risks, and get useful customer insights without extra hassle.",
   },
   {
-    title: "Marketing teams",
+    title: "E-commerce & Retail",
     description:
-      "that needs to understand how customers really decide, and what they value.",
+      "We make recommendations and pricing smarter so customers are happier and businesses sell more.",
   },
   {
-    title: "Enterprises",
-    description: "seeking automation, insights, meaning.",
+    title: "Manufacturing / Industry 4.0",
+    description:
+      "We help factories use machines better, find small problems quickly, and keep things running smoothly.",
+  },
+  {
+    title: "Marketing Teams",
+    description:
+      "That needs to understand how customers really decide, and what they value.",
+  },
+  {
+    title: "Enterprise / SaaS",
+    description:
+      "We help IT teams track productivity, support new employees, and make work simpler for everyone.",
   },
 ];
 
@@ -57,6 +60,8 @@ const allCards = [
   rightCards[2], // Enterprises
 ];
 
+import { useSplineCache } from "@/hooks/useSplineCache";
+
 export default function WhoWeBuildForSection() {
   const [hoveredCard, setHoveredCard] = useState<string | null>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -71,6 +76,21 @@ export default function WhoWeBuildForSection() {
   useEffect(() => {
     hoveredCardRef.current = hoveredCard;
   }, [hoveredCard]);
+
+  const [isMobile, setIsMobile] = useState(true);
+  const { sceneUrl } = useSplineCache(
+    "https://prod.spline.design/lPFhmjX09AKt3iES/scene.splinecode"
+  );
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   // Mouse move handler
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
@@ -108,9 +128,9 @@ export default function WhoWeBuildForSection() {
         onMouseMove={handleMouseMove}
         onMouseLeave={() => setHoveredCard(null)}
       >
-        {/* 6. Only render Spline IF 'inView' is true */}
+        {/* 6. Only render Spline IF 'inView' is true AND not mobile AND we have a URL */}
         <div className="relative w-full h-full overflow-hidden">
-          {inView && (
+          {inView && !isMobile && sceneUrl && (
             <Suspense
               fallback={
                 <div className="w-full h-full flex items-center justify-center">
@@ -121,7 +141,7 @@ export default function WhoWeBuildForSection() {
               <Spline
                 // 💡 THE FIX: Scaled 80% and anchored to the bottom
                 className="w-full h-full scale-70 origin-bottom"
-                scene="https://prod.spline.design/lPFhmjX09AKt3iES/scene.splinecode"
+                scene={sceneUrl}
               />
             </Suspense>
           )}
@@ -151,7 +171,7 @@ export default function WhoWeBuildForSection() {
             animationSpeed={5}
             showBorder={false}
           >
-            <h2 className="font-semibold text-center text-[24px leading-8 md:font-bold md:text-[38px] md:leading-[46px] mb-8">
+            <h2 className="font-semibold text-center text-[24px] leading-8 md:font-bold md:text-[38px] md:leading-[46px] mb-8">
               Every industry has its own challenges and stories waiting to be
               transformed by AI.
             </h2>

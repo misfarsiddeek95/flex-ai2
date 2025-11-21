@@ -17,8 +17,7 @@ export default function CaseStudiesGrid() {
               href={`/case-studies/${caseStudy.slug}`}
               tags={caseStudy.tags}
               imageHeightClass="h-[280px]"
-              hasVideoThumbnail={true}
-              videoUrl={caseStudy.heroVideo}
+              hasVideoThumbnail={false}
             />
           ))}
         </div>

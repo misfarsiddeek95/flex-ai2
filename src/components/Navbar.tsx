@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -27,28 +27,44 @@ const shouldUseDarkBackground = (pathname: string): boolean => {
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
   const { openModal } = useContactModal();
 
-  const navColor = shouldUseDarkBackground(pathname)
-    ? "bg-black/30"
-    : "bg-white/15";
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const navColor = isScrolled
+    ? "bg-[#1A1A1A]/80 shadow-xl border-white/20"
+    : shouldUseDarkBackground(pathname)
+      ? "bg-black/30 border-white/10"
+      : "bg-white/15 border-white/10";
 
   return (
-    <nav className="absolute top-0 left-0 right-0 z-50 w-full flex justify-center pt-6 sm:pt-8">
+    <nav
+      className={`fixed top-0 left-0 right-0 z-50 w-full flex justify-center transition-all duration-300 ${isScrolled ? "pt-4 pb-4" : "pt-6 sm:pt-8"
+        }`}
+    >
       {/* Relative container for positioning dropdown */}
       <div className="relative max-w-4xl w-full mx-4">
         {/* The floating, glassmorphism bar */}
         <div
-          className={`relative z-10 flex items-center justify-between w-full px-5 py-0 sm:py-2 ${navColor} backdrop-blur-md rounded-xl shadow-lg border border-white/10`}
+          className={`relative z-10 flex items-center justify-between w-full px-5 transition-all duration-300 ${isScrolled ? "py-2" : "py-2 sm:py-3"
+            } ${navColor} backdrop-blur-md rounded-xl border`}
         >
           <Link href="/" className="flex items-center space-x-2 sm:ml-10">
             <Image
               src="/white_logo.svg"
               alt="Flexiana AI Logo"
-              width={150}
+              width={isScrolled ? 120 : 150}
               height={30}
               priority
+              className="transition-all duration-300"
             />
           </Link>
 
@@ -78,7 +94,8 @@ export default function Navbar() {
           <button
             type="button"
             onClick={openModal}
-            className="hidden md:block bg-gradient-to-r from-[#FF6F00] to-[#C33C00] text-white text-base font-normal py-[8px] px-6 rounded-lg shadow-md hover:opacity-90 transition-opacity"
+            className={`hidden md:block bg-gradient-to-r from-[#FF6F00] to-[#C33C00] text-white font-normal rounded-lg shadow-md hover:opacity-90 transition-all duration-300 ${isScrolled ? "py-1.5 px-5 text-sm" : "py-[8px] px-6 text-base"
+              }`}
           >
             Contact Us
           </button>
@@ -108,7 +125,7 @@ export default function Navbar() {
 
         {/* Mobile Menu Dropdown */}
         {isOpen && (
-          <div className="md:hidden w-full bg-black/40 backdrop-blur-md rounded-xl shadow-lg border border-white/10 mt-2 p-5">
+          <div className="md:hidden w-full bg-[#1A1A1A]/95 backdrop-blur-md rounded-xl shadow-lg border border-white/10 mt-2 p-5 animate-in fade-in slide-in-from-top-2">
             <div className="flex flex-col items-center space-y-4">
               <Link
                 href="/about"

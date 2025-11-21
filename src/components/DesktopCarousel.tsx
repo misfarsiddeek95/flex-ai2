@@ -12,6 +12,7 @@ export default function DesktopCarousel() {
     imgSrc: cs.heroImage,
     videoSrc: cs.heroVideo,
     href: `/case-studies/${cs.slug}`,
+    carouselData: cs.carouselData,
   }));
 
   // 1. Set up Embla
@@ -91,12 +92,13 @@ export default function DesktopCarousel() {
           {/* The space between cards */}
           {caseStudies.map((study, index) => (
             // Each slide
-            <div className="grow-0 shrink-0 min-w-0 w-3/4" key={index}>
-              <div className="aspect-video rounded-2xl overflow-hidden">
+            <div className="grow-0 shrink-0 min-w-0 w-[55%]" key={index}>
+              <div className="aspect-video rounded-2xl overflow-hidden shadow-2xl transition-transform duration-500 hover:scale-[1.02]">
                 <CaseStudyCard
                   title={study.title}
                   videoUrl={study.videoSrc}
                   href={study.href}
+                  carouselData={study.carouselData}
                 />
               </div>
             </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import GradientText from "../ui/GradientText";
 
 const HistorySection = () => {
@@ -116,191 +117,201 @@ const HistorySection = () => {
       <div className="sticky top-0 h-screen flex items-center justify-center py-8 px-4">
         <div className="w-full max-w-7xl mx-auto">
           {/* --- DESKTOP VIEW --- */}
-          <div className="hidden lg:flex items-center gap-32">
-            <div
-              className="shrink-0 relative overflow-hidden"
-              style={{ width: "300px", height: "600px" }}
-            >
-              {/* Rotating circle (SVG only) */}
-              <div
-                className="absolute transition-transform duration-100 ease-linear"
-                style={{
-                  transform: `scaleX(-1) rotate(${rotation}deg)`,
-                  right: "0",
-                  top: "45%",
-                  marginTop: "-275px",
-                  width: "600px",
-                  height: "600px",
-                }}
-              >
-                <svg viewBox="0 0 550 550" className="w-full h-full">
-                  <defs>
-                    <linearGradient
-                      id="ringGradient"
-                      x1="0%"
-                      y1="0%"
-                      x2="100%"
-                      y2="100%"
-                    >
-                      <stop
-                        offset="0%"
-                        style={{ stopColor: "#51C4F6", stopOpacity: 1 }}
-                      />
-                      <stop
-                        offset="25%"
-                        style={{ stopColor: "#4A66CC", stopOpacity: 1 }}
-                      />
-                      <stop
-                        offset="50%"
-                        style={{ stopColor: "#7A45C5", stopOpacity: 1 }}
-                      />
-                      <stop
-                        offset="75%"
-                        style={{ stopColor: "#FF8A3D", stopOpacity: 1 }}
-                      />
-                      <stop
-                        offset="100%"
-                        style={{ stopColor: "#FFC34A", stopOpacity: 1 }}
-                      />
-                    </linearGradient>
-                  </defs>
-
-                  <circle
-                    cx="275"
-                    cy="275"
-                    r="210"
-                    fill="none"
-                    stroke="url(#ringGradient)"
-                    strokeWidth="80"
-                  />
-
-                  <circle cx="275" cy="275" r="145" fill="white" />
-                </svg>
-              </div>
-
-              {/* Years positioned on the circle arc - separate container (not flipped) */}
-              <div
-                className="absolute transition-transform duration-100 ease-linear"
-                style={{
-                  transform: `rotate(${rotation}deg)`,
-                  right: "0",
-                  top: "45%",
-                  marginTop: "-275px",
-                  width: "600px",
-                  height: "600px",
-                }}
-              >
-                {timelineData.map((item, index) => {
-                  const totalItems = timelineData.length;
-                  // Distribute years evenly around the circle (270 degrees arc)
-                  const startAngle = -45; // Start angle (top-right)
-                  const endAngle = 225; // End angle (bottom-right)
-                  const angleRange = endAngle - startAngle;
-                  const angle =
-                    startAngle + (angleRange / (totalItems - 1)) * index;
-
-                  // Calculate position on circle (radius 250px for outer positioning)
-                  const radius = 250;
-                  const angleRad = (angle * Math.PI) / 180;
-                  const x = 50 + (radius / 275) * 50 * Math.cos(angleRad); // Convert to percentage
-                  const y = 50 + (radius / 275) * 50 * Math.sin(angleRad); // Convert to percentage
-
-                  const isActive = index === activeIndex;
-
-                  return (
-                    <div
-                      key={index}
-                      className={`absolute font-semibold transition-all duration-300 whitespace-nowrap ${
-                        isActive ? "text-[#1A1A1A]" : "text-[#9CA3AF] italic"
-                      }`}
-                      style={{
-                        left: `${x}%`,
-                        top: `${y}%`,
-                        transform: isActive
-                          ? `translate(-50%, -50%)`
-                          : `translate(-50%, -50%) rotate(${-rotation}deg)`,
-                        fontSize: isActive ? "24px" : "20px",
-                      }}
-                    >
-                      {item.year}
-                    </div>
-                  );
-                })}
-              </div>
-
-              {/* Active year indicator (dot) and year display - fixed position */}
-              <div
-                className="absolute pointer-events-none flex items-center gap-3"
-                style={{
-                  right: "120px",
-                  top: "50%",
-                  transform: "translateY(-50%)",
-                }}
-              >
-                <div className="w-3 h-3 rounded-full bg-[#4A9AE8]"></div>
-                <span className="text-2xl font-semibold text-[#1A1A1A]">
-                  {timelineData[activeIndex].year}
-                </span>
+          <div className="hidden lg:block">
+            {/* Header Row - Aligned with the text column */}
+            <div className="flex gap-32 mb-20">
+              <div className="shrink-0 w-[300px]" /> {/* Spacer matching circle width */}
+              <div className="flex-1">
+                <GradientText
+                  colors={["#51C4F6", "#4A66CC", "#7A45C5", "#FF8A3D", "#FFC34A"]}
+                  animationSpeed={5}
+                  showBorder={false}
+                  className="ml-0"
+                >
+                  <h1 className="text-[48px] font-bold leading-14">
+                    Flexiana Throughout
+                    <br />
+                    the Years
+                  </h1>
+                </GradientText>
               </div>
             </div>
 
-            <div className="flex-1">
-              <GradientText
-                colors={["#51C4F6", "#4A66CC", "#7A45C5", "#FF8A3D", "#FFC34A"]}
-                animationSpeed={5}
-                showBorder={false}
-                className="ml-0 mb-20"
+            {/* Content Row - Circle and Text aligned centrally */}
+            <div className="flex items-center gap-32">
+              <div
+                className="shrink-0 relative overflow-hidden"
+                style={{ width: "300px", height: "600px" }}
               >
-                <h1 className="text-[48px] font-bold leading-14">
-                  Flexiana Throughout
-                  <br />
-                  the Years
-                </h1>
-              </GradientText>
-              <div className="relative" style={{ height: "450px" }}>
-                {timelineData.map((item, index) => {
-                  const totalItems = timelineData.length;
-                  // Better spacing with padding
-                  const padding = 8;
-                  const availableSpace = 100 - padding * 2;
-                  const activeYPercent =
-                    padding + (availableSpace / (totalItems - 1)) * activeIndex;
-                  const inactiveYPercent =
-                    padding + (availableSpace / (totalItems - 1)) * index;
-                  const isActive = index === activeIndex;
-                  const isAboveActive = index > activeIndex; // For above-active text hiding
-
-                  return (
-                    <div
-                      key={index}
-                      className={`absolute transition-all duration-500 ${
-                        isActive
-                          ? "opacity-100 text-[#1A1A1A]"
-                          : isAboveActive
-                          ? "opacity-0" // Hide the text if above active
-                          : "opacity-35 text-[#9CA3AF] italic"
-                      }`}
-                      style={{
-                        top: isActive
-                          ? `${activeYPercent}%`
-                          : `${inactiveYPercent}%`,
-                        transform: `translateY(-50%) ${
-                          !isActive ? "rotate(-8deg)" : "rotate(0deg)"
-                        }`,
-                        transformOrigin: "left center",
-                        width: "85%",
-                        maxWidth: "600px",
-                      }}
-                    >
-                      <p
-                        className="text-[24px] font-semibold leading-8"
-                        style={{ fontFamily: "Inter" }}
+                {/* Rotating circle (SVG only) */}
+                <div
+                  className="absolute transition-transform duration-100 ease-linear"
+                  style={{
+                    transform: `scaleX(-1) rotate(${rotation}deg)`,
+                    right: "0",
+                    top: "45%",
+                    marginTop: "-275px",
+                    width: "600px",
+                    height: "600px",
+                  }}
+                >
+                  <svg viewBox="0 0 550 550" className="w-full h-full">
+                    <defs>
+                      <linearGradient
+                        id="ringGradient"
+                        x1="0%"
+                        y1="0%"
+                        x2="100%"
+                        y2="100%"
                       >
-                        {item.description}
-                      </p>
-                    </div>
-                  );
-                })}
+                        <stop
+                          offset="0%"
+                          style={{ stopColor: "#51C4F6", stopOpacity: 1 }}
+                        />
+                        <stop
+                          offset="25%"
+                          style={{ stopColor: "#4A66CC", stopOpacity: 1 }}
+                        />
+                        <stop
+                          offset="50%"
+                          style={{ stopColor: "#7A45C5", stopOpacity: 1 }}
+                        />
+                        <stop
+                          offset="75%"
+                          style={{ stopColor: "#FF8A3D", stopOpacity: 1 }}
+                        />
+                        <stop
+                          offset="100%"
+                          style={{ stopColor: "#FFC34A", stopOpacity: 1 }}
+                        />
+                      </linearGradient>
+                    </defs>
+
+                    <circle
+                      cx="275"
+                      cy="275"
+                      r="210"
+                      fill="none"
+                      stroke="url(#ringGradient)"
+                      strokeWidth="80"
+                    />
+
+                    <circle cx="275" cy="275" r="145" fill="white" />
+                  </svg>
+                </div>
+
+                {/* Years positioned on the circle arc */}
+                <div
+                  className="absolute transition-transform duration-100 ease-linear"
+                  style={{
+                    transform: `rotate(${rotation}deg)`,
+                    right: "0",
+                    top: "45%",
+                    marginTop: "-275px",
+                    width: "600px",
+                    height: "600px",
+                  }}
+                >
+                  {timelineData.map((item, index) => {
+                    const totalItems = timelineData.length;
+                    const startAngle = -45;
+                    const endAngle = 225;
+                    const angleRange = endAngle - startAngle;
+                    const angle =
+                      startAngle + (angleRange / (totalItems - 1)) * index;
+
+                    const radius = 250;
+                    const angleRad = (angle * Math.PI) / 180;
+                    const x = 50 + (radius / 275) * 50 * Math.cos(angleRad);
+                    const y = 50 + (radius / 275) * 50 * Math.sin(angleRad);
+
+                    const isActive = index === activeIndex;
+
+                    return (
+                      <div
+                        key={index}
+                        className={`absolute font-semibold transition-all duration-300 whitespace-nowrap ${isActive ? "text-[#1A1A1A]" : "text-[#9CA3AF] italic"
+                          }`}
+                        style={{
+                          left: `${x}%`,
+                          top: `${y}%`,
+                          transform: isActive
+                            ? `translate(-50%, -50%)`
+                            : `translate(-50%, -50%) rotate(${-rotation}deg)`,
+                          fontSize: isActive ? "24px" : "20px",
+                        }}
+                      >
+                        {item.year}
+                      </div>
+                    );
+                  })}
+                </div>
+
+                {/* Active year indicator */}
+                <div
+                  className="absolute pointer-events-none flex items-center gap-4"
+                  style={{
+                    right: "60px",
+                    top: "50%",
+                    transform: "translateY(-50%)",
+                    zIndex: 20,
+                  }}
+                >
+                  {/* Dot with pulse */}
+                  <div className="relative flex items-center justify-center">
+                    <div className="absolute w-full h-full bg-[#4A9AE8] rounded-full animate-ping opacity-20"></div>
+                    <div className="w-4 h-4 rounded-full bg-[#4A9AE8] border-[3px] border-white shadow-md relative z-10"></div>
+                  </div>
+
+                  {/* Year Card */}
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={activeIndex}
+                      initial={{ opacity: 0, x: -20, scale: 0.8 }}
+                      animate={{ opacity: 1, x: 0, scale: 1 }}
+                      exit={{ opacity: 0, x: 20, scale: 0.8 }}
+                      transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                      className="bg-white/80 backdrop-blur-md border border-white/60 shadow-[0_8px_30px_rgb(0,0,0,0.04)] px-6 py-3 rounded-xl"
+                    >
+                      <span className="text-4xl font-bold bg-linear-to-r from-[#51C4F6] via-[#4A66CC] to-[#7A45C5] bg-clip-text text-transparent">
+                        {timelineData[activeIndex].year}
+                      </span>
+                    </motion.div>
+                  </AnimatePresence>
+                </div>
+              </div>
+
+              <div className="flex-1">
+                <div className="relative" style={{ height: "450px" }}>
+                  {timelineData.map((item, index) => {
+                    const isActive = index === activeIndex;
+                    const isPast = index < activeIndex;
+
+                    const topPosition = isActive ? 50 : isPast ? 0 : 100;
+
+                    return (
+                      <div
+                        key={index}
+                        className={`absolute transition-all duration-500 ${isActive
+                          ? "opacity-100 text-[#1A1A1A]"
+                          : "opacity-0"
+                          }`}
+                        style={{
+                          top: `${topPosition}%`,
+                          transform: `translateY(-50%) ${!isActive ? "rotate(-8deg)" : "rotate(0deg)"
+                            }`,
+                          transformOrigin: "left center",
+                          width: "85%",
+                          maxWidth: "600px",
+                        }}
+                      >
+                        <p className="text-[24px] font-semibold leading-8">
+                          {item.description}
+                        </p>
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
             </div>
           </div>
@@ -388,19 +399,39 @@ const HistorySection = () => {
               {/* 2. This container is moved from 'bottom-0' to 'top-0'
                    and the dot/year are re-ordered.
               */}
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 flex flex-col items-center gap-8">
-                <span className="text-2xl font-semibold text-[#1A1A1A] transition-all -rotate-90">
-                  {timelineData[activeIndex].year}
-                </span>
-                <div className="w-2.5 h-2.5 rounded-full bg-linear-to-r from-[#42A5F5] to-[#7E57C2]"></div>
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={activeIndex}
+                    initial={{ opacity: 0, y: 10, scale: 0.8 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: -10, scale: 0.8 }}
+                    transition={{ duration: 0.2 }}
+                    className="bg-white/80 backdrop-blur-sm border border-white/50 shadow-sm px-4 py-2 rounded-lg -rotate-90 origin-center"
+                  >
+                    <span className="text-2xl font-bold bg-linear-to-r from-[#51C4F6] to-[#7A45C5] bg-clip-text text-transparent">
+                      {timelineData[activeIndex].year}
+                    </span>
+                  </motion.div>
+                </AnimatePresence>
+                <div className="w-3 h-3 rounded-full bg-[#4A9AE8] border-2 border-white shadow-sm z-10"></div>
               </div>
             </div>
             {/* --- END OF MODIFIED SECTION --- */}
 
-            <div className="px-8 text-center max-w-lg">
-              <p className="text-[20px] sm:text-[24px] font-semibold leading-7 sm:leading-8 text-[#1A1A1A] transition-all">
-                {timelineData[activeIndex].description}
-              </p>
+            <div className="px-8 text-center max-w-lg min-h-[120px] flex items-start justify-center">
+              <AnimatePresence mode="wait">
+                <motion.p
+                  key={activeIndex}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.3, ease: "easeOut" }}
+                  className="text-[20px] sm:text-[24px] font-semibold leading-7 sm:leading-8 text-[#1A1A1A]"
+                >
+                  {timelineData[activeIndex].description}
+                </motion.p>
+              </AnimatePresence>
             </div>
           </div>
         </div>

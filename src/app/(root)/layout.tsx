@@ -1,4 +1,5 @@
 import Footer from "@/components/Footer";
+import FooterCTA from "@/components/FooterCTA";
 import Navbar from "@/components/Navbar";
 import { ContactModalProvider } from "@/contexts/ContactModalContext";
 import ContactModal from "@/components/ui/ContactModal";
@@ -13,6 +14,7 @@ export default function RootLayout({
     <ContactModalProvider>
       <Navbar />
       <main>{children}</main>
+      <FooterCTA />
       <Footer />
       <ContactModalWrapper />
     </ContactModalProvider>

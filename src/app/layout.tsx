@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { fontSatoshi, fontAlpino } from "./fonts";
 import "./globals.css";
+import SplinePrefetcher from "@/components/SplinePrefetcher";
+import SmoothScrolling from "@/components/SmoothScrolling";
 
 export const metadata: Metadata = {
   title: "Flexiana AI",
@@ -15,19 +17,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link
-          rel="preload"
-          // Paste your NEW, optimized Spline scene URL here
-          href="https://prod.spline.design/lPFhmjX09AKt3iES/scene.splinecode"
-          as="fetch"
-          crossOrigin="anonymous"
-        />
+
       </head>
       <body
         className={`${fontSatoshi.variable} ${fontAlpino.variable} antialiased`}
         suppressHydrationWarning={true}
       >
+        <SmoothScrolling />
         {children}
+        <SplinePrefetcher />
       </body>
     </html>
   );

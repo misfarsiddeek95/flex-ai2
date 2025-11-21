@@ -25,7 +25,7 @@ export default function MeetFounder() {
               className="ml-0"
             >
               <h1
-                className="font-inter font-bold 
+                className="font-bold 
                          text-[32px] leading-[38px]
                          lg:text-[48px] lg:leading-14"
               >
@@ -40,20 +40,29 @@ export default function MeetFounder() {
 
             {/* Paragraph with responsive font styles */}
             <p
-              className="font-inter text-[#616161] mt-4
+              className="text-[#616161] mt-4
                          text-[16px] leading-6 font-normal
                          lg:text-[21px] lg:leading-7 lg:font-semibold"
-              style={{ letterSpacing: "0px" }}
             >
-              Jiri, the founder of Flexiana, cherishes family time, has a
-              passion for Clojure, and boasts over 29 years of software
-              development expertise.
+              Jiri has spent almost 30 years building software, but what drives
+              him isn’t just code, it’s creating things that truly make a
+              difference.
+            </p>
+            <p
+              className="text-[#616161] mt-4
+                         text-[16px] leading-6 font-normal
+                         lg:text-[21px] lg:leading-7 lg:font-semibold"
+            >
+              He loves spending time with his family, and his passion for
+              Clojure keeps him curious and excited every day. At Flexiana, he
+              brings that same care and dedication to everything the team
+              builds, shaping a place where people and ideas come first.
             </p>
 
             {/* CTA Link */}
-            <Link
+            {/* <Link
               href="/about" // Change this to the correct link
-              className="font-inter font-semibold text-[21px] leading-7
+              className="font-semibold text-[21px] leading-7
                          mt-6 inline-block w-fit
                          bg-linear-to-r from-[#FF6F00] to-[#C33C00]
                          bg-clip-text text-transparent
@@ -61,7 +70,7 @@ export default function MeetFounder() {
               style={{ letterSpacing: "0px" }}
             >
               Read more &gt;
-            </Link>
+            </Link> */}
           </div>
 
           {/* --- Right Column (Image) --- */}

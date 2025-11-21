@@ -42,7 +42,7 @@ export default function AnimatedCounter({
   return (
     <span ref={ref} className={className}>
       {prefix}
-      <motion.span>{displayValue}</motion.span>
+      <motion.span style={{ fontSize: "1.5em" }}>{displayValue}</motion.span>
       {suffix}
     </span>
   );

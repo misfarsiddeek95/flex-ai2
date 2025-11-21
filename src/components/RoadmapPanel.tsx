@@ -79,17 +79,17 @@ const RoadmapPanel: React.FC<RoadmapPanelProps> = ({
               zIndex: 0,
             }}
           >
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-4 items-start">
-              <div className="md:col-span-2">
-                <p className="font-normal text-lg leading-6 text-gray-800">
+            <div className="grid grid-cols-1 md:grid-cols-1 gap-x-8 gap-y-4 items-start">
+              <div className="md:col-span-3">
+                <p className="font-normal text-xl md:text-3xl leading-6 md:leading-10 text-gray-800">
                   {panel.description}
                 </p>
               </div>
-              <div className="md:col-span-1">
+              {/* <div className="md:col-span-1">
                 <p className="font-semibold text-xl leading-7 md:text-right italic text-gray-700">
                   &quot;{panel.quote}&quot;
                 </p>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

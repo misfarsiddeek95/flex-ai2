@@ -7,14 +7,13 @@ export default function OurStory() {
 
   // For the numbers: Inter 700, 48px, gradient text
   const numberStyles = `
-    font-inter font-bold text-5xl leading-[56px] 
+    font-bold text-5xl leading-[56px] 
     bg-gradient-to-r from-[#42A5F5] to-[#7E57C2] 
     bg-clip-text text-transparent
   `;
 
   // For the labels: Inter 400, 16px
-  const labelStyles =
-    "font-inter font-normal text-base leading-6 text-[#1A1A1A] mt-2";
+  const labelStyles = "font-normal text-base leading-6 text-[#1A1A1A] mt-2";
 
   return (
     <section className="bg-[#F5F5F7] py-16 md:py-24">
@@ -29,23 +28,21 @@ export default function OurStory() {
               showBorder={false}
               className="ml-0"
             >
-              <h1 className="ffont-inter font-bold text-5xl leading-14">
-                Our Story
-              </h1>
+              <h1 className="font-bold text-5xl leading-14">Our Story</h1>
             </GradientText>
           </div>
 
           {/* Right Column: Paragraph */}
           <div>
             <p
-              className="font-inter font-normal text-lg leading-6 text-[#1A1A1A]"
+              className="font-normal text-lg leading-7 text-[#1A1A1A]"
               style={{ letterSpacing: "0px" }}
             >
-              At Flexiana, we believe that compromises are merely limitations we
-              place on ourselves. We&apos;re here to prove that building the
-              right solutions is not only possible — it&apos;s our standard.
-              Since 2016, our passion and commitment have consistently delivered
-              real value to businesses around the world.
+              From the beginning, Flexiana was built on a simple idea: don’t
+              compromise when the right solution is within reach. Since 2016,
+              that belief has guided us. Our passion for good software and
+              genuine collaboration has helped us create meaningful results for
+              companies around the world.
             </p>
           </div>
         </div>

@@ -117,19 +117,19 @@ export default function LogoCarouselSection() {
       <div className="container mx-auto max-w-7xl pt-24 px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h1
-            className="font-inter font-bold text-[#1A1A1A]
+            className="font-bold text-[#1A1A1A]
                        text-5xl leading-14"
             style={{ letterSpacing: "0px" }}
           >
             Our Projects
           </h1>
           <p
-            className="font-inter font-semibold text-gray-600
+            className="font-semibold text-gray-600
                        text-2xl leading-8 mt-4"
             style={{ letterSpacing: "0px" }}
           >
-            Enhancing your experience with smarter faster and more reliable
-            digital services.
+            Smarter software. Intelligent apps. AI that feels intuitive. All
+            built to elevate every moment of your digital life.
           </p>
         </div>
 

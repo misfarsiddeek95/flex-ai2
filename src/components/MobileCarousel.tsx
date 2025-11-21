@@ -13,6 +13,7 @@ export default function MobileCarousel() {
     imgSrc: cs.heroImage,
     videoUrl: cs.heroVideo,
     href: `/case-studies/${cs.slug}`,
+    carouselData: cs.carouselData,
   }));
 
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [Autoplay()]);
@@ -40,11 +41,12 @@ export default function MobileCarousel() {
             // Each slide
             <div className="grow-0 shrink-0 w-full min-w-0" key={index}>
               <div className="p-4">
-                <div className="aspect-[4/5] rounded-2xl overflow-hidden">
+                <div className="w-full">
                   <CaseStudyCard
                     title={study.title}
                     videoUrl={study.videoUrl}
                     href={study.href}
+                    carouselData={study.carouselData}
                   />
                 </div>
               </div>
@@ -62,10 +64,9 @@ export default function MobileCarousel() {
             className={`
               transition-all duration-300 rounded-full
               h-3 
-              ${
-                index === selectedIndex
-                  ? "w-10 bg-linear-to-r from-[#42A5F5] to-[#7E57C2]"
-                  : "w-3 bg-gray-300"
+              ${index === selectedIndex
+                ? "w-10 bg-linear-to-r from-[#42A5F5] to-[#7E57C2]"
+                : "w-3 bg-gray-300"
               }
             `}
             aria-label={`Go to slide ${index + 1}`}

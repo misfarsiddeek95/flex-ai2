@@ -47,7 +47,7 @@ const layoutStyles = [
 
 export default function AboutBanner() {
   return (
-    <section className="bg-white py-16 md:py-48">
+    <section className="bg-white py-28 md:py-48">
       <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* --- Left Column (Text) --- */}
@@ -59,7 +59,7 @@ export default function AboutBanner() {
               className="ml-0"
             >
               <h1
-                className="font-inter font-bold
+                className="font-bold
                          text-[32px] leading-[38px]
                          lg:text-[48px] lg:leading-14"
               >
@@ -73,14 +73,16 @@ export default function AboutBanner() {
               </h1>
             </GradientText>
             <p
-              className="font-inter font-normal text-[#1A1A1A]
-                         text-lg leading-6 mt-4"
+              className="font-normal text-[#1A1A1A]
+                         text-lg leading-7 mt-4"
               style={{ letterSpacing: "0px" }}
             >
-              Flexiana is a remote-first community, full of open-minded,
-              autonomous craftsmen with a passion for developing software.
-              Together we build a space of trust and collaboration. We are
-              spread across the globe and highly value our diversity.
+              Flexiana is more than a remote team—we’re a global circle of
+              curious minds and passionate creators. Each of us crafts software
+              with care, autonomy, and a shared belief in building things that
+              matter. Across continents and time zones, we’ve shaped a home
+              built on trust, collaboration, and the power of our diverse
+              voices.
             </p>
           </div>
 

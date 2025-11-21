@@ -15,14 +15,22 @@ export default function Home() {
     <main className="min-h-screen relative bg-white">
       <HeroBanner />
       {/* It provides a 50% viewport height (h-[50vh]) of blank space to fix the scroll animation bug. */}
-      <section className="h-[50vh] bg-[linear-gradient(135deg,#fff7ed_0%,#faf5ff_90%,#f0f9ff_100%)]" />
+      {/* <section className="h-[50vh] bg-[linear-gradient(135deg,#fff7ed_0%,#faf5ff_90%,#f0f9ff_100%)]" /> */}
+
       <AiStatement />
+
       <AboutUsSection />
+
       <RoadmapSection />
+
       {/* <IndustriesSection /> */}
+
       <WhyFlexianaSection />
+
       <WhoWeBuildForSection />
+
       <CaseStudySection />
+
       {/* <TestimonialsSection /> */}
       {/* <CTASection imgSrc="" /> */}
     </main>

@@ -117,6 +117,14 @@ const mockCaseStudies: CaseStudy[] = [
       "CI/CD",
       "developer tools",
     ],
+    carouselData: {
+      title: "Gitrevio: Code Reviews, Evolved",
+      points: [
+        "Track review quality",
+        "Reveal team insights",
+        "Speed merges & clarity",
+      ],
+    },
   },
   {
     id: "2",
@@ -234,6 +242,14 @@ const mockCaseStudies: CaseStudy[] = [
       "HIPAA compliance",
       "medical diagnosis",
     ],
+    carouselData: {
+      title: "Fiiha: Smarter Campaigns, Better Results",
+      points: [
+        "AIAuto-tags segments, campaigns & outreach",
+        "Optimizes with Bayesian algorithms",
+        "Measures what truly works for your audience",
+      ],
+    },
   },
   {
     id: "3",
@@ -347,6 +363,14 @@ const mockCaseStudies: CaseStudy[] = [
       "performance optimization",
       "microservices",
     ],
+    carouselData: {
+      title: "MarginBoost: Smarter Margins, in Real Time",
+      points: [
+        "Dynamic pricing",
+        "Adapts instantly to markets",
+        "15–20% more accurate",
+      ],
+    },
   },
   {
     id: "4",
@@ -467,6 +491,14 @@ const mockCaseStudies: CaseStudy[] = [
       "AI platform",
       "media production",
     ],
+    carouselData: {
+      title: "Kaleidux: Personalization Redefined",
+      points: [
+        "Custom recommendation engines",
+        "Leverages your data across touch points",
+        "Boosts conversions up to 30%",
+      ],
+    },
   },
 ];
 

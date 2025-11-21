@@ -47,6 +47,14 @@ export interface CaseStudy {
   // SEO
   metaDescription?: string;
   metaKeywords?: string[];
+
+  // Carousel Data (New)
+  carouselData?: CarouselData;
+}
+
+export interface CarouselData {
+  title: string;
+  points: string[];
 }
 
 export interface SolutionApproach {
