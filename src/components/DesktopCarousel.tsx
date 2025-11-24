@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useEffect, useRef, useCallback } from "react";
-import useEmblaCarousel from "embla-carousel-react";
+import React, { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import CaseStudyCard from "./ui/CaseStudyCard";
 import { getAllCaseStudies } from "@/lib/caseStudies";
 
@@ -15,96 +15,45 @@ export default function DesktopCarousel() {
     carouselData: cs.carouselData,
   }));
 
-  // 1. Set up Embla
-  const [emblaRef, emblaApi] = useEmblaCarousel({
-    loop: false, // Don't loop
-    align: "start", // Align to the left
-    skipSnaps: true, // Allows for a smoother, non-snapping scroll
+  const targetRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: targetRef,
   });
 
-  // 2. Ref to prevent rapid scrolling from a single wheel flick
-  const isWheeling = useRef(false);
-
-  // 3. The Wheel Event Handler
-  const onWheel = useCallback(
-    (event: WheelEvent) => {
-      if (!emblaApi) return;
-
-      // If we're already processing a scroll, ignore this one
-      if (isWheeling.current) {
-        event.preventDefault(); // Still stop the page from scrolling
-        return;
-      }
-
-      const deltaY = event.deltaY;
-      const canScrollNext = emblaApi.canScrollNext();
-      const canScrollPrev = emblaApi.canScrollPrev();
-
-      if (deltaY > 0) {
-        // Scrolling DOWN
-        if (canScrollNext) {
-          // If we can scroll right, do it and STOP the page scroll
-          event.preventDefault();
-          emblaApi.scrollNext();
-        } else {
-          // We're at the end, so LET the page scroll
-          return;
-        }
-      } else if (deltaY < 0) {
-        // Scrolling UP
-        if (canScrollPrev) {
-          // If we can scroll left, do it and STOP the page scroll
-          event.preventDefault();
-          emblaApi.scrollPrev();
-        } else {
-          // We're at the beginning, so LET the page scroll
-          return;
-        }
-      }
-
-      // Set a "cooldown" to prevent hyperscrolling
-      isWheeling.current = true;
-      setTimeout(() => {
-        isWheeling.current = false;
-      }, 300); // 300ms cooldown
-    },
-    [emblaApi]
-  );
-
-  // 4. Attach the event listener
-  useEffect(() => {
-    const viewport = emblaApi?.containerNode()?.parentElement;
-    if (viewport) {
-      // We must add { passive: false } to be able to call event.preventDefault()
-      viewport.addEventListener("wheel", onWheel, { passive: false });
-      return () => viewport.removeEventListener("wheel", onWheel);
-    }
-  }, [emblaApi, onWheel]);
+  // Transform vertical scroll to horizontal movement
+  // We want to move from 0% to -(total width - viewport width)
+  // With 40% width cards + gap, we need to calculate roughly how far to scroll
+  // A safe bet for "end to end" is usually around -((N-1) * cardWidth)% or similar
+  // Let's try -45% for now and adjust if needed based on item count
+  const x = useTransform(scrollYProgress, [0, 1], ["0%", "-45%"]);
 
   return (
     // This entire component is hidden on mobile
-    <div className="hidden md:block">
-      {/* Viewport: This is what we attach the wheel event to */}
-      <div className="overflow-hidden" ref={emblaRef}>
-        {/* Container */}
-        <div className="flex gap-6">
-          {" "}
-          {/* The space between cards */}
-          {caseStudies.map((study, index) => (
-            // Each slide
-            <div className="grow-0 shrink-0 min-w-0 w-[55%]" key={index}>
-              <div className="aspect-video rounded-2xl overflow-hidden shadow-2xl transition-transform duration-500 hover:scale-[1.02]">
-                <CaseStudyCard
-                  title={study.title}
-                  videoUrl={study.videoSrc}
-                  href={study.href}
-                  carouselData={study.carouselData}
-                />
+    <div className="hidden md:block relative">
+      {/* Scroll Track - Height determines scroll duration */}
+      <section ref={targetRef} className="relative h-[250vh]">
+        {/* Sticky Container */}
+        <div className="sticky top-0 flex h-screen items-center overflow-hidden">
+          {/* Horizontal Moving Track */}
+          <motion.div style={{ x }} className="flex gap-8">
+            <div className="w-12 shrink-0" />
+            {caseStudies.map((study, index) => (
+              // Each slide
+              <div className="relative h-[80vh] w-[40vw] shrink-0" key={index}>
+                <div className="h-full w-full transition-transform duration-500">
+                  <CaseStudyCard
+                    title={study.title}
+                    videoUrl={study.videoSrc}
+                    href={study.href}
+                    carouselData={study.carouselData}
+                  />
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+            <div className="w-12 shrink-0" />
+          </motion.div>
         </div>
-      </div>
+      </section>
     </div>
   );
 }

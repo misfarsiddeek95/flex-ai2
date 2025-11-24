@@ -15,9 +15,9 @@ const products = [
 ];
 
 const legalLinks = [
-  { name: "Privacy Policy", href: "/privacy-policy" },
-  { name: "Terms & Conditions", href: "/terms-conditions" },
-  { name: "Cookie Policy", href: "/cookie-policy" },
+  { name: "Privacy Policy", href: "https://flexiana.com/privacy-policy" },
+  // { name: "Terms & Conditions", href: "/terms-conditions" },
+  // { name: "Cookie Policy", href: "/cookie-policy" },
 ];
 
 // --- Main Component ---
@@ -58,6 +58,7 @@ export default function Footer() {
                         key={product.name}
                         href={product.href}
                         className="font-sans text-[15px] text-[#1A1A1A] hover:text-[#42A5F5] transition-colors duration-200 font-medium text-center lg:text-left"
+                        target="_blank"
                       >
                         {product.name}
                       </Link>
@@ -71,7 +72,8 @@ export default function Footer() {
                     <Link
                       key={link.name}
                       href={link.href}
-                      className="font-sans text-[14px] text-[#616161] hover:text-[#42A5F5] transition-colors duration-200 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[2px] after:bg-gradient-to-r after:from-[#42A5F5] after:to-[#7E57C2] hover:after:w-full after:transition-all after:duration-300"
+                      className="font-sans text-[14px] text-[#616161] hover:text-[#42A5F5] transition-colors duration-200 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-linear-to-r after:from-[#42A5F5] after:to-[#7E57C2] hover:after:w-full after:transition-all after:duration-300"
+                      target="_blank"
                     >
                       {link.name}
                     </Link>

@@ -5,7 +5,7 @@ import GradientText from "./ui/GradientText";
 
 export default function CaseStudySection() {
   return (
-    <section className="bg-white py-16 md:py-24 overflow-hidden">
+    <section className="bg-white py-16 md:pt-24 md:pb-0">
       {/* Header & Mobile Carousel Container */}
       <div className="container mx-auto max-w-7xl px-4 sm:px-8">
         <div className="flex mb-12 md:mb-16 flex-col items-start gap-4 md:flex-row md:items-center md:justify-between">

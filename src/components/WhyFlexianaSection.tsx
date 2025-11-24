@@ -17,6 +17,7 @@ const featureData = [
             targetValue={12}
             suffix="+"
             className="font-bold text-4xl md:text-5xl text-transparent bg-clip-text bg-[linear-gradient(100.7deg,#42A5F5_5.16%,#7E57C2_100%)]"
+            style={{ fontFamily: "inter" }}
           />
           <span className="font-normal text-lg leading-6 text-[#1A1A1A]">
             years of software
@@ -32,6 +33,7 @@ const featureData = [
             prefix="$"
             suffix="B+"
             className="font-bold text-4xl md:text-5xl text-transparent bg-clip-text bg-[linear-gradient(100.7deg,#42A5F5_5.16%,#7E57C2_100%)]"
+            style={{ fontFamily: "inter" }}
           />
           <span className="font-normal text-lg leading-6 text-[#1A1A1A]">
             in client value

@@ -9,6 +9,7 @@ interface AnimatedCounterProps {
   prefix?: string;
   suffix?: string;
   className?: string; // To pass text styling
+  style?: React.CSSProperties;
 }
 
 export default function AnimatedCounter({
@@ -17,6 +18,7 @@ export default function AnimatedCounter({
   prefix = "",
   suffix = "",
   className = "",
+  style,
 }: AnimatedCounterProps) {
   const ref = useRef(null);
   // Trigger animation only when it's 100px from the bottom of the viewport
@@ -42,7 +44,7 @@ export default function AnimatedCounter({
   return (
     <span ref={ref} className={className}>
       {prefix}
-      <motion.span style={{ fontSize: "1.5em" }}>{displayValue}</motion.span>
+      <motion.span style={{ ...style }}>{displayValue}</motion.span>
       {suffix}
     </span>
   );

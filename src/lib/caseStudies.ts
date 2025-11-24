@@ -136,7 +136,7 @@ const mockCaseStudies: CaseStudy[] = [
     year: "2024",
     duration: "8 months",
     heroImage: "/images/case-studies/fiiha.jpg",
-    heroVideo: "https://player.vimeo.com/video/1137834847",
+    heroVideo: "https://player.vimeo.com/video/1139433575",
     heroImageAlt: "Fiiha AI platform dashboard",
     tags: ["Multimodal AI", "Software", "2024"],
 

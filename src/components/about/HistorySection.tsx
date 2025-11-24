@@ -120,10 +120,17 @@ const HistorySection = () => {
           <div className="hidden lg:block">
             {/* Header Row - Aligned with the text column */}
             <div className="flex gap-32 mb-20">
-              <div className="shrink-0 w-[300px]" /> {/* Spacer matching circle width */}
+              <div className="shrink-0 w-[300px]" />{" "}
+              {/* Spacer matching circle width */}
               <div className="flex-1">
                 <GradientText
-                  colors={["#51C4F6", "#4A66CC", "#7A45C5", "#FF8A3D", "#FFC34A"]}
+                  colors={[
+                    "#51C4F6",
+                    "#4A66CC",
+                    "#7A45C5",
+                    "#FF8A3D",
+                    "#FFC34A",
+                  ]}
                   animationSpeed={5}
                   showBorder={false}
                   className="ml-0"
@@ -230,8 +237,9 @@ const HistorySection = () => {
                     return (
                       <div
                         key={index}
-                        className={`absolute font-semibold transition-all duration-300 whitespace-nowrap ${isActive ? "text-[#1A1A1A]" : "text-[#9CA3AF] italic"
-                          }`}
+                        className={`absolute font-semibold transition-all duration-300 whitespace-nowrap ${
+                          isActive ? "text-[#1A1A1A]" : "text-[#9CA3AF] italic"
+                        }`}
                         style={{
                           left: `${x}%`,
                           top: `${y}%`,
@@ -270,7 +278,11 @@ const HistorySection = () => {
                       initial={{ opacity: 0, x: -20, scale: 0.8 }}
                       animate={{ opacity: 1, x: 0, scale: 1 }}
                       exit={{ opacity: 0, x: 20, scale: 0.8 }}
-                      transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 400,
+                        damping: 25,
+                      }}
                       className="bg-white/80 backdrop-blur-md border border-white/60 shadow-[0_8px_30px_rgb(0,0,0,0.04)] px-6 py-3 rounded-xl"
                     >
                       <span className="text-4xl font-bold bg-linear-to-r from-[#51C4F6] via-[#4A66CC] to-[#7A45C5] bg-clip-text text-transparent">
@@ -292,20 +304,24 @@ const HistorySection = () => {
                     return (
                       <div
                         key={index}
-                        className={`absolute transition-all duration-500 ${isActive
-                          ? "opacity-100 text-[#1A1A1A]"
-                          : "opacity-0"
-                          }`}
+                        className={`absolute transition-all duration-500 ${
+                          isActive ? "opacity-100 text-[#1A1A1A]" : "opacity-0"
+                        }`}
                         style={{
                           top: `${topPosition}%`,
-                          transform: `translateY(-50%) ${!isActive ? "rotate(-8deg)" : "rotate(0deg)"
-                            }`,
+                          transform: `translateY(-50%) ${
+                            !isActive ? "rotate(-8deg)" : "rotate(0deg)"
+                          }`,
                           transformOrigin: "left center",
                           width: "85%",
                           maxWidth: "600px",
                         }}
                       >
-                        <p className="text-[24px] font-semibold leading-8">
+                        <p
+                          className={`${
+                            isActive ? "text-4xl" : "text-[24px]"
+                          } font-semibold leading-10`}
+                        >
                           {item.description}
                         </p>
                       </div>

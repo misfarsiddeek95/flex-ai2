@@ -39,7 +39,7 @@ const cardData = [
   {
     title: "Marketing Teams",
     description:
-      "That needs to understand how customers really decide, and what they value.",
+      "We help marketers test ideas, discover what messages work, know who to target, and track performance so campaigns keep getting better.",
   },
   {
     title: "Enterprise / SaaS",
@@ -139,8 +139,10 @@ export default function WhoWeBuildForSection() {
               }
             >
               <Spline
-                // 💡 THE FIX: Scaled 80% and anchored to the bottom
-                className="w-full h-full scale-70 origin-bottom"
+                // 💡 THE FIX: Force wide canvas (1600px) to ensure hands are rendered (FOV).
+                // Then scale down responsively to fit the viewport.
+                // incase if needed add 0.10 to scale.
+                className="w-full h-full min-w-[1600px] absolute left-1/2 -translate-x-1/2 origin-bottom md:scale-[0.45] lg:scale-[0.55] xl:scale-[0.65] 2xl:scale-[0.75]"
                 scene={sceneUrl}
               />
             </Suspense>
@@ -151,7 +153,7 @@ export default function WhoWeBuildForSection() {
               content: "";
               position: absolute;
               bottom: 0;
-              right: 130;
+              right: 0;
               width: 25%; /* Adjust based on logo size; test and increase if needed */
               height: 60px; /* Adjust based on logo size */
               background-color: #f5f5f7; /* Matches your section background */
