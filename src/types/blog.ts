@@ -18,6 +18,7 @@ export interface BlogPost {
   content: string; // HTML string from rich text editor
   metaDescription?: string;
   metaKeywords?: string[];
+  showInHome?: boolean;
 }
 
 export interface BlogMetadata {

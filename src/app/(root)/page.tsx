@@ -9,6 +9,7 @@ import WhoWeBuildForSection from "@/components/WhoWeBuildForSection";
 import CaseStudySection from "@/components/CaseStudySection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import CTASection from "@/components/CTASection";
+import SingleBlogItem from "@/components/blog/SingleBlogItem";
 
 export default function Home() {
   return (
@@ -28,6 +29,8 @@ export default function Home() {
       <WhyFlexianaSection />
 
       <WhoWeBuildForSection />
+
+      <SingleBlogItem />
 
       <CaseStudySection />
 

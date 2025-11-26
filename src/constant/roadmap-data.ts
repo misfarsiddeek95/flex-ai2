@@ -49,4 +49,5 @@ export const roadmapData: RoadmapStep[] = [
 // --- CONSTANTS FOR THE STICKY EFFECT ---
 export const PANEL_HEADER_HEIGHT_PX = 120; // 120px
 export const STICKY_TOP_OFFSET_PX = 20; // 20px
-export const PANEL_SCROLL_PAST_HEIGHT = "60vh";
+// export const PANEL_SCROLL_PAST_HEIGHT = "60vh"; ----> Used previousely.
+export const PANEL_SCROLL_PAST_HEIGHT = "45vh"; // ----> changed according to the client's preference.

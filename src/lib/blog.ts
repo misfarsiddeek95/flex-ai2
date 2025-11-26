@@ -68,6 +68,7 @@ X_train, X_test, y_train, y_test = train_test_split(
       "machine learning",
       "digital transformation",
     ],
+    showInHome: true,
   },
   {
     id: "2",
@@ -314,4 +315,13 @@ export function getAllTags(): string[] {
     post.tags.forEach((tag) => tagsSet.add(tag));
   });
   return Array.from(tagsSet).sort();
+}
+
+/**
+ * Get the featured blog post for the home page
+ * @returns The blog post with showInHome: true, or the first post if none found
+ */
+export function getFeaturedBlogPost(): BlogPost {
+  const featuredPost = mockBlogPosts.find((post) => post.showInHome);
+  return featuredPost || mockBlogPosts[0];
 }
