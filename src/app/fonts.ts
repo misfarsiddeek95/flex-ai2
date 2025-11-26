@@ -26,3 +26,20 @@ export const fontAlpino = localFont({
   display: "swap",
   variable: "--font-alpino", // This is the CSS variable name
 });
+
+export const fontHelvetica = localFont({
+  src: [
+    {
+      path: "../../public/fonts/Helvetica-Now-normal-400-100.otf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../../public/fonts/Helvetica-Now-normal-700-100.otf",
+      weight: "700",
+      style: "normal",
+    },
+  ],
+  display: "swap",
+  variable: "--font-helvetica",
+});

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { fontSatoshi, fontAlpino } from "./fonts";
+import { fontSatoshi, fontAlpino, fontHelvetica } from "./fonts";
 import "./globals.css";
 import SplinePrefetcher from "@/components/SplinePrefetcher";
 import SmoothScrolling from "@/components/SmoothScrolling";
@@ -20,7 +20,7 @@ export default function RootLayout({
 
       </head>
       <body
-        className={`${fontSatoshi.variable} ${fontAlpino.variable} antialiased`}
+        className={`${fontSatoshi.variable} ${fontAlpino.variable} ${fontHelvetica.variable} antialiased`}
         suppressHydrationWarning={true}
       >
         <SmoothScrolling />
