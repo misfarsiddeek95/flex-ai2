@@ -18,7 +18,7 @@ export default function BlogContent({ content }: BlogContentProps) {
         transition={{ duration: 0.4 }}
         className="container mx-auto max-w-[800px]"
       >
-        <RichTextRenderer htmlContent={content} />
+        <RichTextRenderer htmlContent={content} enableMediaProcessing={false} />
       </motion.div>
     </section>
   );
