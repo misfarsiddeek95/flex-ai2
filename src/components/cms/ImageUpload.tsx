@@ -7,7 +7,7 @@ import Image from "next/image";
 import { showSuccess, handleApiError } from "@/lib/toast";
 
 interface ImageUploadProps {
-    value?: string;
+    value?: string | null;
     onChange: (url: string) => void;
     type: "blog" | "case-study";
     label?: string;

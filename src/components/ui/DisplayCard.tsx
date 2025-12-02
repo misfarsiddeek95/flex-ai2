@@ -5,7 +5,7 @@ import TagButton from "./TagButton";
 
 interface DisplayCardProps {
   title: string;
-  imageUrl: string;
+  imageUrl?: string | null;
   href: string;
   author?: string;
   readTime?: string;

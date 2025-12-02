@@ -33,8 +33,17 @@ export async function POST(request: Request) {
 
         const body = await request.json();
 
+        // Sanitize payload
+        const payload = {
+            ...body,
+            publishDate: new Date(body.publishDate),
+            imageUrl: body.imageUrl || "",
+            imageAlt: body.imageAlt || "",
+            readTime: body.readTime || "5 min read", // Default if missing
+        };
+
         // If this blog is set to show in home, unset others
-        if (body.showInHome) {
+        if (payload.showInHome) {
             await prisma.blog.updateMany({
                 where: { showInHome: true },
                 data: { showInHome: false },
@@ -42,7 +51,7 @@ export async function POST(request: Request) {
         }
 
         const blog = await prisma.blog.create({
-            data: body,
+            data: payload,
         });
         return NextResponse.json(blog);
     } catch (error: unknown) {
@@ -56,6 +65,8 @@ export async function POST(request: Request) {
                     { status: 403 }
                 );
             }
+            console.error("Error creating blog:", error);
+            return NextResponse.json({ error: `Failed to create blog: ${error.message}` }, { status: 500 });
         }
         return NextResponse.json({ error: "Failed to create blog" }, { status: 500 });
     }

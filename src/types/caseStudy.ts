@@ -12,9 +12,9 @@ export interface CaseStudy {
   industry: string;
   year: string;
   duration: string;
-  heroImage: string;
-  heroVideo: string;
-  heroImageAlt: string;
+  heroImage?: string | null;
+  heroVideo?: string | null;
+  heroImageAlt?: string | null;
   tags: string[];
 
   // Overview
@@ -78,6 +78,6 @@ export interface RelatedCaseStudy {
   id: string;
   slug: string;
   title: string;
-  imageUrl: string;
+  imageUrl?: string | null;
   tags: string[];
 }

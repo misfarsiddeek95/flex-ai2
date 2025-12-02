@@ -33,8 +33,19 @@ export async function POST(request: Request) {
         await requireAuth(PERMISSIONS.CASE_STUDIES.CREATE);
 
         const body = await request.json();
+
+        // Sanitize payload
+        const payload = {
+            ...body,
+            heroImage: body.heroImage || "",
+            heroImageAlt: body.heroImageAlt || "",
+            heroVideo: body.heroVideo || "",
+            metaDescription: body.metaDescription || "",
+            carouselData: body.carouselData || "",
+        };
+
         const caseStudy = await prisma.caseStudy.create({
-            data: body,
+            data: payload,
         });
         return NextResponse.json(caseStudy);
     } catch (error: any) {
@@ -47,8 +58,9 @@ export async function POST(request: Request) {
                 { status: 403 }
             );
         }
+        console.error("Error creating case study:", error);
         return NextResponse.json(
-            { error: "Failed to create case study" },
+            { error: `Failed to create case study: ${error.message}` },
             { status: 500 }
         );
     }

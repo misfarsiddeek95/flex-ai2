@@ -12,8 +12,8 @@ export interface BlogPost {
   authorImage?: string;
   publishDate: string; // ISO 8601 format
   readTime: string; // e.g., "9 min read"
-  imageUrl: string;
-  imageAlt: string;
+  imageUrl?: string | null;
+  imageAlt?: string | null;
   tags: string[];
   content: string; // HTML string from rich text editor
   metaDescription?: string;
@@ -37,6 +37,6 @@ export interface RelatedArticle {
   title: string;
   author: string;
   readTime: string;
-  imageUrl: string;
+  imageUrl?: string | null;
   tags: string[];
 }

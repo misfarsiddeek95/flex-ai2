@@ -56,6 +56,7 @@ export default function DesktopCarousel({ caseStudies }: DesktopCarouselProps) {
                   <CaseStudyCard
                     title={study.title}
                     videoUrl={study.videoSrc}
+                    imgSrc={study.imgSrc}
                     href={study.href}
                     carouselData={study.carouselData}
                   />

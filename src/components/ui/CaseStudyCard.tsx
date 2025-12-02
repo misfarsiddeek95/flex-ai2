@@ -5,7 +5,8 @@ import { CarouselData } from "@/types/caseStudy";
 
 interface CaseStudyCardProps {
   title: string;
-  videoUrl: string;
+  videoUrl?: string | null;
+  imgSrc?: string | null;
   href: string;
   carouselData?: CarouselData;
 }
@@ -13,6 +14,7 @@ interface CaseStudyCardProps {
 const CaseStudyCard = memo(function CaseStudyCard({
   title,
   videoUrl,
+  imgSrc,
   href,
   carouselData,
 }: CaseStudyCardProps) {
@@ -31,22 +33,34 @@ const CaseStudyCard = memo(function CaseStudyCard({
       <div
         className="relative flex flex-col w-full h-full md:p-0"
       >
-        {/* Video container */}
+        {/* Video/Image container */}
         <div
           className="relative w-full aspect-video overflow-hidden bg-gray-100 rounded-t-2xl"
           style={{ isolation: "isolate" }}
         >
-          <iframe
-            src={`${videoUrl}?autoplay=1&loop=1&muted=1&background=1&autopause=0&quality=720p`}
-            className="absolute -top-[1px] -left-[1px] w-[calc(100%+2px)] h-[calc(100%+2px)] object-cover"
-            style={{
-              border: "none",
-              display: "block",
-            }}
-            allow="autoplay; fullscreen; picture-in-picture"
-            allowFullScreen
-            loading="lazy"
-          />
+          {videoUrl ? (
+            <iframe
+              src={`${videoUrl}?autoplay=1&loop=1&muted=1&background=1&autopause=0&quality=720p`}
+              className="absolute -top-[1px] -left-[1px] w-[calc(100%+2px)] h-[calc(100%+2px)] object-cover"
+              style={{
+                border: "none",
+                display: "block",
+              }}
+              allow="autoplay; fullscreen; picture-in-picture"
+              allowFullScreen
+              loading="lazy"
+            />
+          ) : imgSrc ? (
+            <img
+              src={imgSrc}
+              alt={title}
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+          ) : (
+            <div className="w-full h-full flex items-center justify-center text-gray-400">
+              No Media
+            </div>
+          )}
         </div>
 
         {/* Content Container - Below video on desktop too */}

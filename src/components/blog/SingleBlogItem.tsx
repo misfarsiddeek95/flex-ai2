@@ -44,7 +44,7 @@ const SingleBlogItem = ({ featuredPost }: SingleBlogItemProps) => {
                                 <div className="relative w-full h-full flex items-center justify-center">
                                     {featuredPost.imageUrl ? (
                                         <Image
-                                            src={featuredPost.imageUrl}
+                                            src={featuredPost.imageUrl!}
                                             alt={featuredPost.imageAlt || featuredPost.title}
                                             width={500}
                                             height={400}

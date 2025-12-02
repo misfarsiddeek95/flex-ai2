@@ -45,14 +45,16 @@ export async function generateMetadata({
       description: post.metaDescription || post.subtitle || post.title,
       url: canonicalUrl,
       siteName: "Flexiana AI",
-      images: [
-        {
-          url: post.imageUrl,
-          width: 1200,
-          height: 630,
-          alt: post.imageAlt,
-        },
-      ],
+      ...(post.imageUrl && {
+        images: [
+          {
+            url: post.imageUrl,
+            width: 1200,
+            height: 630,
+            alt: post.imageAlt || post.title,
+          },
+        ],
+      }),
       locale: "en_US",
       type: "article",
       publishedTime: post.publishDate,
@@ -63,7 +65,7 @@ export async function generateMetadata({
       card: "summary_large_image",
       title: post.title,
       description: post.metaDescription || post.subtitle || post.title,
-      images: [post.imageUrl],
+      ...(post.imageUrl && { images: [post.imageUrl] }),
       creator: "@flexiana",
     },
     alternates: {
@@ -101,7 +103,7 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
     headline: post.title,
-    image: post.imageUrl,
+    ...(post.imageUrl && { image: post.imageUrl }),
     author: {
       "@type": "Person",
       name: post.author,

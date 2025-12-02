@@ -11,8 +11,8 @@ interface CaseStudyHeroProps {
   industry: string;
   year: string;
   duration: string;
-  heroImage: string;
-  heroImageAlt: string;
+  heroImage?: string | null;
+  heroImageAlt?: string | null;
   tags: string[];
 }
 
@@ -101,8 +101,8 @@ export default function CaseStudyHero({
           >
             {heroImage ? (
               <Image
-                src={heroImage}
-                alt={heroImageAlt}
+                src={heroImage!}
+                alt={heroImageAlt || ""}
                 fill
                 className="object-cover"
                 priority

@@ -7,8 +7,8 @@ import { motion } from "framer-motion";
 interface BlogDetailBannerProps {
   title: string;
   subtitle?: string;
-  imageUrl: string;
-  imageAlt: string;
+  imageUrl?: string | null;
+  imageAlt?: string | null;
 }
 
 export default function BlogDetailBanner({
@@ -22,8 +22,8 @@ export default function BlogDetailBanner({
       {/* Background Image or Fallback */}
       {imageUrl ? (
         <Image
-          src={imageUrl}
-          alt={imageAlt}
+          src={imageUrl!}
+          alt={imageAlt || ""}
           fill
           className="object-cover z-0"
           priority

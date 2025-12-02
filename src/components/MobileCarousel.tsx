@@ -49,6 +49,7 @@ export default function MobileCarousel({ caseStudies }: MobileCarouselProps) {
                   <CaseStudyCard
                     title={study.title}
                     videoUrl={study.videoUrl}
+                    imgSrc={study.imgSrc}
                     href={study.href}
                     carouselData={study.carouselData}
                   />

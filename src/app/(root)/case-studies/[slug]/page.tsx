@@ -59,14 +59,16 @@ export async function generateMetadata({
       description: caseStudy.metaDescription || caseStudy.overview,
       url: canonicalUrl,
       siteName: "Flexiana AI",
-      images: [
-        {
-          url: caseStudy.heroImage,
-          width: 1200,
-          height: 630,
-          alt: caseStudy.heroImageAlt,
-        },
-      ],
+      ...(caseStudy.heroImage && {
+        images: [
+          {
+            url: caseStudy.heroImage,
+            width: 1200,
+            height: 630,
+            alt: caseStudy.heroImageAlt || caseStudy.title,
+          },
+        ],
+      }),
       locale: "en_US",
       type: "article",
     },
@@ -74,7 +76,7 @@ export async function generateMetadata({
       card: "summary_large_image",
       title: `${caseStudy.title} - ${caseStudy.subtitle}`,
       description: caseStudy.metaDescription || caseStudy.overview,
-      images: [caseStudy.heroImage],
+      ...(caseStudy.heroImage && { images: [caseStudy.heroImage] }),
       creator: "@flexiana",
     },
     alternates: {
