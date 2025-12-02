@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { requireAuth } from "@/lib/auth-helpers";
 import { PERMISSIONS } from "@/lib/permissions";
+import { revalidatePath } from "next/cache";
 
 export async function GET(
     request: Request,
@@ -49,6 +50,13 @@ export async function PUT(
             where: { id },
             data: body,
         });
+
+        revalidatePath("/case-studies");
+        revalidatePath(`/case-studies/${caseStudy.slug}`);
+        if (caseStudy.showInHome) {
+            revalidatePath("/");
+        }
+
         return NextResponse.json(caseStudy);
     } catch (error: any) {
         if (error.message === "Unauthorized") {
@@ -75,9 +83,16 @@ export async function DELETE(
     try {
         await requireAuth(PERMISSIONS.CASE_STUDIES.DELETE);
         const { id } = await params;
-        await prisma.caseStudy.delete({
+        const caseStudy = await prisma.caseStudy.delete({
             where: { id },
         });
+
+        revalidatePath("/case-studies");
+        revalidatePath(`/case-studies/${caseStudy.slug}`);
+        if (caseStudy.showInHome) {
+            revalidatePath("/");
+        }
+
         return NextResponse.json({ message: "Case study deleted" });
     } catch (error: any) {
         if (error.message === "Unauthorized") {

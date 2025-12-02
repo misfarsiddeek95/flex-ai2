@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { requireAuth } from "@/lib/auth-helpers";
 import { PERMISSIONS } from "@/lib/permissions";
+import { revalidatePath } from "next/cache";
 
 export async function GET() {
     try {
@@ -47,6 +48,12 @@ export async function POST(request: Request) {
         const caseStudy = await prisma.caseStudy.create({
             data: payload,
         });
+
+        revalidatePath("/case-studies");
+        if (payload.showInHome) {
+            revalidatePath("/");
+        }
+
         return NextResponse.json(caseStudy);
     } catch (error: any) {
         if (error.message === "Unauthorized") {

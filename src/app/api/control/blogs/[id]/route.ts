@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { requireAuth } from "@/lib/auth-helpers";
 import { PERMISSIONS } from "@/lib/permissions";
+import { revalidatePath } from "next/cache";
 
 export async function GET(
     request: Request,
@@ -60,6 +61,13 @@ export async function PUT(
             where: { id },
             data: body,
         });
+
+        revalidatePath("/blog");
+        revalidatePath(`/blog/${blog.slug}`);
+        if (blog.showInHome) {
+            revalidatePath("/");
+        }
+
         return NextResponse.json(blog);
     } catch (error: unknown) {
         if (error instanceof Error) {
@@ -87,9 +95,16 @@ export async function DELETE(
     try {
         await requireAuth(PERMISSIONS.BLOGS.DELETE);
         const { id } = await params;
-        await prisma.blog.delete({
+        const blog = await prisma.blog.delete({
             where: { id },
         });
+
+        revalidatePath("/blog");
+        revalidatePath(`/blog/${blog.slug}`);
+        if (blog.showInHome) {
+            revalidatePath("/");
+        }
+
         return NextResponse.json({ message: "Blog deleted" });
     } catch (error: unknown) {
         if (error instanceof Error) {
