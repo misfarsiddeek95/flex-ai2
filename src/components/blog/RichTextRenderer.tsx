@@ -2,6 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
+import styles from "./RichTextRenderer.module.css";
 
 interface RichTextRendererProps {
   htmlContent: string;
@@ -61,7 +62,7 @@ export default function RichTextRenderer({
   return (
     <div
       ref={contentRef}
-      className={`rich-text-content max-w-[800px] mx-auto ${className}`}
+      className={`${styles.container} max-w-[800px] mx-auto ${className}`}
       dangerouslySetInnerHTML={{ __html: htmlContent }}
       style={
         {
