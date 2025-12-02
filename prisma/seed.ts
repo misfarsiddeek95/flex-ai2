@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client';
+import bcrypt from 'bcryptjs';
 
 const prisma = new PrismaClient();
 
@@ -794,6 +795,47 @@ async function main() {
     });
     console.log(`Created/Updated blog post: ${blog.title}`);
   }
+
+  // Seed User Types
+  const allPermissions = [
+    "dashboard.view",
+    "users.view", "users.create", "users.edit", "users.delete",
+    "user-types.view", "user-types.create", "user-types.edit", "user-types.delete",
+    "blogs.view", "blogs.create", "blogs.edit", "blogs.delete",
+    "case-studies.view", "case-studies.create", "case-studies.edit", "case-studies.delete"
+  ];
+
+  const adminType = await prisma.systemUserType.upsert({
+    where: { name: 'Admin' },
+    update: {
+      permissions: JSON.stringify(allPermissions),
+    },
+    create: {
+      name: 'Admin',
+      permissions: JSON.stringify(allPermissions),
+      active: true,
+    },
+  });
+  console.log('Created/Updated Admin user type');
+
+  // Seed Admin User
+  const hashedPassword = await bcrypt.hash('admin123', 10);
+  const adminUser = await prisma.systemUser.upsert({
+    where: { email: 'admin@flexiana.com' },
+    update: {
+      password: hashedPassword,
+      userTypeId: adminType.id,
+      active: true,
+    },
+    create: {
+      name: 'Admin User',
+      email: 'admin@flexiana.com',
+      password: hashedPassword,
+      userTypeId: adminType.id,
+      active: true,
+    },
+  });
+  console.log(`Created/Updated Admin user: ${adminUser.email}`);
 
   console.log('Seeding finished.');
 }
