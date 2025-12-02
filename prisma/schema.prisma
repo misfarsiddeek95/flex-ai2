@@ -41,8 +41,8 @@ model Blog {
   authorImage     String?
   publishDate     DateTime
   readTime        String
-  imageUrl        String
-  imageAlt        String
+  imageUrl        String?
+  imageAlt        String?
   tags            String   // Stored as JSON string
   content         String
   metaDescription String?
@@ -62,9 +62,9 @@ model CaseStudy {
   industry        String
   year            String
   duration        String
-  heroImage       String
+  heroImage       String?
   heroVideo       String?
-  heroImageAlt    String
+  heroImageAlt    String?
   tags            String   // Stored as JSON string
   overview        String
   challenge       String   // Stored as JSON string
