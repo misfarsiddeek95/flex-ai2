@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { sendContactEmail } from "@/app/actions/contact";
 
 interface ContactModalProps {
   isOpen: boolean;
@@ -108,17 +109,36 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
 
     setIsSubmitting(true);
 
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+    // Call server action
+    try {
+      const result = await sendContactEmail(formData);
 
-    console.log("Form submitted:", formData);
-    setIsSubmitting(false);
-    setSubmitSuccess(true);
-
-    // Close modal after success
-    setTimeout(() => {
-      onClose();
-    }, 2000);
+      if (result.success) {
+        console.log("Form submitted:", formData);
+        setSubmitSuccess(true);
+        // Close modal after success
+        setTimeout(() => {
+          onClose();
+        }, 2000);
+      } else {
+        console.error("Submission failed:", result.error);
+        // Set a general error message on the form (using 'message' field or a new state)
+        // For now, let's just alert or log, as the UI doesn't have a global error state shown in the mock.
+        // But we can set it on the 'message' field to show it to the user.
+        setErrors((prev) => ({
+          ...prev,
+          message: result.error || "Failed to send message",
+        }));
+      }
+    } catch (error) {
+      console.error("Submission error:", error);
+      setErrors((prev) => ({
+        ...prev,
+        message: "An unexpected error occurred. Please try again.",
+      }));
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleBackdropClick = (e: React.MouseEvent) => {
@@ -220,11 +240,10 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
-                    className={`w-full px-4 py-3 text-[16px] border rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 ${
-                      errors.name
-                        ? "border-red-500 focus:ring-red-200"
-                        : "border-gray-300 focus:border-[#42A5F5] focus:ring-[#42A5F5]/20"
-                    }`}
+                    className={`w-full px-4 py-3 text-[16px] border rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 ${errors.name
+                      ? "border-red-500 focus:ring-red-200"
+                      : "border-gray-300 focus:border-[#42A5F5] focus:ring-[#42A5F5]/20"
+                      }`}
                     placeholder="John Doe"
                   />
                   {errors.name && (
@@ -252,11 +271,10 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
-                    className={`w-full px-4 py-3 text-[16px] border rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 ${
-                      errors.email
-                        ? "border-red-500 focus:ring-red-200"
-                        : "border-gray-300 focus:border-[#42A5F5] focus:ring-[#42A5F5]/20"
-                    }`}
+                    className={`w-full px-4 py-3 text-[16px] border rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 ${errors.email
+                      ? "border-red-500 focus:ring-red-200"
+                      : "border-gray-300 focus:border-[#42A5F5] focus:ring-[#42A5F5]/20"
+                      }`}
                     placeholder="john@example.com"
                   />
                   {errors.email && (
@@ -284,11 +302,10 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                     value={formData.message}
                     onChange={handleChange}
                     rows={4}
-                    className={`w-full px-4 py-3 text-[16px] border rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 resize-none ${
-                      errors.message
-                        ? "border-red-500 focus:ring-red-200"
-                        : "border-gray-300 focus:border-[#42A5F5] focus:ring-[#42A5F5]/20"
-                    }`}
+                    className={`w-full px-4 py-3 text-[16px] border rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 resize-none ${errors.message
+                      ? "border-red-500 focus:ring-red-200"
+                      : "border-gray-300 focus:border-[#42A5F5] focus:ring-[#42A5F5]/20"
+                      }`}
                     placeholder="Tell us about your project..."
                   />
                   {errors.message && (

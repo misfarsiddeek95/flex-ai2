@@ -4,11 +4,15 @@ import React, { useState, useEffect, useCallback } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
 import CaseStudyCard from "./ui/CaseStudyCard";
-import { getAllCaseStudies } from "@/lib/caseStudies";
+import { CaseStudy } from "@/types/caseStudy";
 
-export default function MobileCarousel() {
-  // Get case studies from data
-  const caseStudies = getAllCaseStudies().map((cs) => ({
+interface MobileCarouselProps {
+  caseStudies: CaseStudy[];
+}
+
+export default function MobileCarousel({ caseStudies }: MobileCarouselProps) {
+  // Map case studies to the format expected by CaseStudyCard
+  const items = caseStudies.map((cs) => ({
     title: cs.title,
     imgSrc: cs.heroImage,
     videoUrl: cs.heroVideo,
@@ -37,7 +41,7 @@ export default function MobileCarousel() {
       {/* Viewport */}
       <div className="overflow-hidden" ref={emblaRef}>
         <div className="flex">
-          {caseStudies.map((study, index) => (
+          {items.map((study, index) => (
             // Each slide
             <div className="grow-0 shrink-0 w-full min-w-0" key={index}>
               <div className="p-4">
@@ -57,7 +61,7 @@ export default function MobileCarousel() {
 
       {/* Custom Dots */}
       <div className="flex justify-center items-center space-x-2 mt-6">
-        {caseStudies.map((_, index) => (
+        {items.map((_, index) => (
           <button
             key={index}
             onClick={() => emblaApi?.scrollTo(index)}

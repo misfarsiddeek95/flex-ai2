@@ -32,16 +32,26 @@ export default function BlogMetadata({
       className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 py-6 px-4"
     >
       {/* Author Avatar (if provided) */}
-      {authorImage && (
-        <div className="relative w-12 h-12 rounded-full overflow-hidden flex-shrink-0">
+      {/* Author Avatar (if provided) or Placeholder */}
+      <div className="relative w-12 h-12 rounded-full overflow-hidden flex-shrink-0 border border-gray-100 bg-gray-50 flex items-center justify-center">
+        {authorImage ? (
           <Image
             src={authorImage}
             alt={`${author} avatar`}
             fill
             className="object-cover"
           />
-        </div>
-      )}
+        ) : (
+          <span className="text-[#1A1A1A] font-bold text-lg">
+            {author
+              .split(" ")
+              .map((n) => n[0])
+              .join("")
+              .toUpperCase()
+              .slice(0, 2)}
+          </span>
+        )}
+      </div>
 
       {/* Metadata Items */}
       <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 text-[#616161] font-sans text-[16px] leading-[24px]">

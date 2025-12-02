@@ -13,8 +13,8 @@ import CTASection from "@/components/CTASection";
 import {
   getCaseStudyBySlug,
   getRelatedCaseStudies,
-  getAllCaseStudies,
-} from "@/lib/caseStudies";
+  getCaseStudies,
+} from "@/app/actions/case-study";
 
 interface CaseStudyDetailPageProps {
   params: Promise<{
@@ -23,8 +23,9 @@ interface CaseStudyDetailPageProps {
 }
 
 // Generate static params for all case studies at build time
-export function generateStaticParams() {
-  const caseStudies = getAllCaseStudies();
+export async function generateStaticParams() {
+  // Fetch all case studies for static generation (using a large limit)
+  const { caseStudies } = await getCaseStudies(1, 1000);
   return caseStudies.map((caseStudy) => ({
     slug: caseStudy.slug,
   }));
@@ -38,7 +39,7 @@ export async function generateMetadata({
   params,
 }: CaseStudyDetailPageProps): Promise<Metadata> {
   const { slug } = await params;
-  const caseStudy = getCaseStudyBySlug(slug);
+  const caseStudy = await getCaseStudyBySlug(slug);
 
   if (!caseStudy) {
     return {
@@ -86,13 +87,13 @@ export default async function CaseStudyDetailPage({
   params,
 }: CaseStudyDetailPageProps) {
   const { slug } = await params;
-  const caseStudy = getCaseStudyBySlug(slug);
+  const caseStudy = await getCaseStudyBySlug(slug);
 
   if (!caseStudy) {
     notFound();
   }
 
-  const relatedCaseStudies = getRelatedCaseStudies(slug, 3);
+  const relatedCaseStudies = await getRelatedCaseStudies(slug, 3);
 
   // Structured data for SEO
   const structuredData = {
@@ -117,7 +118,7 @@ export default async function CaseStudyDetailPage({
   };
 
   return (
-    <main className="min-h-screen relative bg-white">
+    <div className="min-h-screen relative bg-white">
       {/* Structured Data */}
       <script
         type="application/ld+json"
@@ -160,6 +161,6 @@ export default async function CaseStudyDetailPage({
 
       {/* CTA Section */}
       {/* <CTASection imgSrc="" /> */}
-    </main>
+    </div>
   );
 }

@@ -4,13 +4,15 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { getFeaturedBlogPost } from "@/lib/blog";
 import { ArrowRight } from "lucide-react";
 import TagButton from "../ui/TagButton";
+import { BlogPost } from "@/types/blog";
 
-const SingleBlogItem = () => {
-    const featuredPost = getFeaturedBlogPost();
+interface SingleBlogItemProps {
+    featuredPost: BlogPost | null;
+}
 
+const SingleBlogItem = ({ featuredPost }: SingleBlogItemProps) => {
     if (!featuredPost) return null;
 
     const formatDate = (dateString: string) => {
@@ -40,13 +42,19 @@ const SingleBlogItem = () => {
                             {/* Image Section */}
                             <div className="w-full md:w-1/2 relative bg-gray-50 p-8 md:p-12 flex items-center justify-center min-h-[300px] md:min-h-[400px]">
                                 <div className="relative w-full h-full flex items-center justify-center">
-                                    <Image
-                                        src={featuredPost.imageUrl}
-                                        alt={featuredPost.imageAlt}
-                                        width={500}
-                                        height={400}
-                                        className="object-contain max-h-[300px] w-auto drop-shadow-lg transition-transform duration-500 group-hover:scale-105"
-                                    />
+                                    {featuredPost.imageUrl ? (
+                                        <Image
+                                            src={featuredPost.imageUrl}
+                                            alt={featuredPost.imageAlt || featuredPost.title}
+                                            width={500}
+                                            height={400}
+                                            className="object-contain max-h-[300px] w-auto drop-shadow-lg transition-transform duration-500 group-hover:scale-105"
+                                        />
+                                    ) : (
+                                        <div className="w-full h-full flex items-center justify-center text-gray-400">
+                                            No Image Available
+                                        </div>
+                                    )}
                                 </div>
                             </div>
 

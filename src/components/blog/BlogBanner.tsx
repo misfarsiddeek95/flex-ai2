@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 
 export default function BlogBanner() {
   return (
-    <section className="relative w-full overflow-hidden h-[500px] max-h-[40vh] md:max-h-[60vh] min-h-[250px]">
+    <div className="relative w-full overflow-hidden h-[500px] max-h-[40vh] md:max-h-[60vh] min-h-[250px]">
       <Image
         src="/images/blog_banner.jpg"
         alt="Abstract white flowing lines"
@@ -47,6 +47,6 @@ export default function BlogBanner() {
           </div>
         </motion.div>
       </div>
-    </section>
+    </div>
   );
 }

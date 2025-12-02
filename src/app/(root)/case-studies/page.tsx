@@ -4,14 +4,17 @@ import CTASection from "@/components/CTASection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import React from "react";
 
+// Revalidate every 60 seconds
+export const revalidate = 60;
+
 const page = () => {
   return (
-    <main className="min-h-screen relative bg-white">
+    <div className="min-h-screen relative bg-white">
       <LogoCarouselSection />
       <CaseStudiesGrid />
       {/* <TestimonialsSection /> */}
       {/* <CTASection imgSrc="" /> */}
-    </main>
+    </div>
   );
 };
 

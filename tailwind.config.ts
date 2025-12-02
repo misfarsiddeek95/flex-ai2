@@ -10,10 +10,10 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        // 'sans' is now your body font (Alpino)
-        sans: ["var(--font-alpino)", ...defaultTheme.fontFamily.sans],
-        // 'satoshi' is your heading font
-        satoshi: ["var(--font-satoshi)", ...defaultTheme.fontFamily.sans],
+        // 'sans' is now your body font (Helvetica)
+        sans: ["var(--font-helvetica)", ...defaultTheme.fontFamily.sans],
+        // 'satoshi' was your heading font, now mapped to Helvetica
+        satoshi: ["var(--font-helvetica)", ...defaultTheme.fontFamily.sans],
       },
     },
   },

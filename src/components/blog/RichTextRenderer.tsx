@@ -6,17 +6,19 @@ import Image from "next/image";
 interface RichTextRendererProps {
   htmlContent: string;
   className?: string;
+  enableMediaProcessing?: boolean;
 }
 
 export default function RichTextRenderer({
   htmlContent,
   className = "",
+  enableMediaProcessing = true,
 }: RichTextRendererProps) {
   // Create a ref for the content container
   const contentRef = React.useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
-    if (!contentRef.current) return;
+    if (!contentRef.current || !enableMediaProcessing) return;
 
     // Process images: convert img tags to Next.js Image components
     const images = contentRef.current.querySelectorAll("img");
@@ -54,7 +56,7 @@ export default function RichTextRenderer({
         wrapper.appendChild(video);
       }
     });
-  }, [htmlContent]);
+  }, [htmlContent, enableMediaProcessing]);
 
   return (
     <div

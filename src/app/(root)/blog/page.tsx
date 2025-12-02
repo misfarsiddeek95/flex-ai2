@@ -3,13 +3,16 @@ import BlogBanner from "@/components/blog/BlogBanner";
 import BlogSection from "@/components/blog/BlogSection";
 import CTASection from "@/components/CTASection";
 
+// Revalidate every 60 seconds
+export const revalidate = 60;
+
 const page = () => {
   return (
-    <main className="min-h-screen relative bg-white">
+    <div className="min-h-screen relative bg-white">
       <BlogBanner />
       <BlogSection />
       {/* <CTASection imgSrc="" /> */}
-    </main>
+    </div>
   );
 };
 

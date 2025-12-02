@@ -2,6 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import RichTextRenderer from "../blog/RichTextRenderer";
 
 interface CaseStudyOverviewProps {
   overview: string;
@@ -22,9 +23,7 @@ export default function CaseStudyOverview({
           <h2 className="font-bold text-[32px] md:text-[40px] text-[#1A1A1A] mb-6">
             Overview
           </h2>
-          <p className="text-[18px] md:text-[21px] leading-relaxed text-[#616161]">
-            {overview}
-          </p>
+          <RichTextRenderer htmlContent={overview} enableMediaProcessing={false} />
         </motion.div>
       </div>
     </section>

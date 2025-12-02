@@ -99,13 +99,19 @@ export default function CaseStudyHero({
             transition={{ duration: 0.6, delay: 0.2 }}
             className="relative h-[400px] md:h-[500px] rounded-2xl overflow-hidden shadow-2xl"
           >
-            <Image
-              src={heroImage}
-              alt={heroImageAlt}
-              fill
-              className="object-cover"
-              priority
-            />
+            {heroImage ? (
+              <Image
+                src={heroImage}
+                alt={heroImageAlt}
+                fill
+                className="object-cover"
+                priority
+              />
+            ) : (
+              <div className="w-full h-full flex items-center justify-center bg-gray-200 text-gray-400">
+                No Image Available
+              </div>
+            )}
           </motion.div>
         </div>
       </div>

@@ -7,13 +7,13 @@ import CTASection from "@/components/CTASection";
 
 const About = () => {
   return (
-    <main className="min-h-screen relative bg-white">
+    <div className="min-h-screen relative bg-white">
       <AboutBanner />
       <OurStory />
       <HistorySection />
       <MeetFounder />
       {/* <CTASection imgSrc="" /> */}
-    </main>
+    </div>
   );
 };
 

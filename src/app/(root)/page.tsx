@@ -10,10 +10,16 @@ import CaseStudySection from "@/components/CaseStudySection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import CTASection from "@/components/CTASection";
 import SingleBlogItem from "@/components/blog/SingleBlogItem";
+import { getFeaturedBlogPost } from "@/app/actions/blog";
 
-export default function Home() {
+// Revalidate every 60 seconds
+export const revalidate = 60;
+
+export default async function Home() {
+  const featuredPost = await getFeaturedBlogPost();
+
   return (
-    <main className="min-h-screen relative bg-white">
+    <div className="min-h-screen relative bg-white">
       <HeroBanner />
       {/* It provides a 50% viewport height (h-[50vh]) of blank space to fix the scroll animation bug. */}
       {/* <section className="h-[50vh] bg-[linear-gradient(135deg,#fff7ed_0%,#faf5ff_90%,#f0f9ff_100%)]" /> */}
@@ -30,12 +36,12 @@ export default function Home() {
 
       <WhoWeBuildForSection />
 
-      <SingleBlogItem />
+      <SingleBlogItem featuredPost={featuredPost} />
 
       <CaseStudySection />
 
       {/* <TestimonialsSection /> */}
       {/* <CTASection imgSrc="" /> */}
-    </main>
+    </div>
   );
 }

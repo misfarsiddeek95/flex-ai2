@@ -47,7 +47,7 @@ h6 {
     transform: translateX(-10px);
   }
 
-  75% {
+  50% {
     transform: translateX(10px);
   }
 }
@@ -105,7 +105,7 @@ h6 {
 
   /* Headings */
   h1 {
-    font-family: var(--font-satoshi), ui-sans-serif, system-ui, sans-serif;
+    font-family: var(--font-helvetica), ui-sans-serif, system-ui, sans-serif;
     font-size: 48px;
     line-height: 56px;
     color: #1a1a1a;
@@ -116,7 +116,7 @@ h6 {
   }
 
   h2 {
-    font-family: var(--font-satoshi), ui-sans-serif, system-ui, sans-serif;
+    font-family: var(--font-helvetica), ui-sans-serif, system-ui, sans-serif;
     font-size: 40px;
     line-height: 48px;
     color: #1a1a1a;
@@ -127,7 +127,7 @@ h6 {
   }
 
   h3 {
-    font-family: var(--font-satoshi), ui-sans-serif, system-ui, sans-serif;
+    font-family: var(--font-helvetica), ui-sans-serif, system-ui, sans-serif;
     font-size: 32px;
     line-height: 40px;
     color: #1a1a1a;
@@ -138,7 +138,7 @@ h6 {
   }
 
   h4 {
-    font-family: var(--font-satoshi), ui-sans-serif, system-ui, sans-serif;
+    font-family: var(--font-helvetica), ui-sans-serif, system-ui, sans-serif;
     font-size: 24px;
     line-height: 32px;
     color: #1a1a1a;
@@ -149,7 +149,7 @@ h6 {
   }
 
   h5 {
-    font-family: var(--font-satoshi), ui-sans-serif, system-ui, sans-serif;
+    font-family: var(--font-helvetica), ui-sans-serif, system-ui, sans-serif;
     font-size: 21px;
     line-height: 28px;
     color: #1a1a1a;
@@ -160,7 +160,7 @@ h6 {
   }
 
   h6 {
-    font-family: var(--font-satoshi), ui-sans-serif, system-ui, sans-serif;
+    font-family: var(--font-helvetica), ui-sans-serif, system-ui, sans-serif;
     font-size: 18px;
     line-height: 24px;
     color: #1a1a1a;
@@ -172,7 +172,7 @@ h6 {
 
   /* Paragraphs */
   p {
-    font-family: var(--font-alpino), ui-sans-serif, system-ui, sans-serif;
+    font-family: var(--font-helvetica), ui-sans-serif, system-ui, sans-serif;
     font-size: 18px;
     line-height: 32px;
     color: #1a1a1a;
@@ -201,28 +201,50 @@ h6 {
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
   }
 
-  /* Code Blocks */
-  pre {
+  /* Code Blocks (Quill & Standard) */
+  pre,
+  .ql-syntax,
+  .ql-code-block-container {
     background-color: #f5f5f7;
     border: 1px solid #e0e0e0;
     border-radius: 8px;
     padding: 16px;
     margin: 24px 0;
     overflow-x: auto;
-  }
-
-  pre code {
-    font-family: "Courier New", Courier, monospace;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !important;
     font-size: 14px;
     line-height: 24px;
     color: #1a1a1a;
+  }
+
+  /* Individual lines in Quill code blocks */
+  .ql-code-block {
+    font-family: inherit !important;
+    font-size: inherit;
+    line-height: inherit;
+    color: inherit;
+    white-space: pre;
+    /* Strictly preserve whitespace and prevent wrapping */
+    min-width: 100%;
+    display: block;
+  }
+
+  /* Support for inner code tags if present */
+  pre code,
+  .ql-syntax code {
+    font-family: inherit !important;
+    font-size: inherit;
+    line-height: inherit;
+    color: inherit;
     background: transparent;
     padding: 0;
+    white-space: pre;
+    tab-size: 2;
   }
 
   /* Inline Code */
   code {
-    font-family: "Courier New", Courier, monospace;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !important;
     font-size: 16px;
     background-color: #f5f5f7;
     color: #c33c00;
@@ -233,12 +255,14 @@ h6 {
   /* Lists */
   ul,
   ol {
-    font-family: var(--font-alpino), ui-sans-serif, system-ui, sans-serif;
+    font-family: var(--font-helvetica), ui-sans-serif, system-ui, sans-serif;
     font-size: 18px;
     line-height: 32px;
     color: #1a1a1a;
-    margin: 16px 0;
-    padding-left: 24px;
+    margin: 24px 0;
+    padding-left: 40px;
+    /* Increased padding */
+    list-style-position: outside;
   }
 
   ul li,
@@ -273,7 +297,7 @@ h6 {
     border-image: linear-gradient(to bottom, #42a5f5, #7e57c2) 1;
     padding-left: 24px;
     margin: 32px 0;
-    font-family: var(--font-alpino), ui-sans-serif, system-ui, sans-serif;
+    font-family: var(--font-helvetica), ui-sans-serif, system-ui, sans-serif;
     font-size: 21px;
     line-height: 36px;
     font-style: italic;

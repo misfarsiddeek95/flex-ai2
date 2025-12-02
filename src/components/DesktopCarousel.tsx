@@ -3,11 +3,23 @@
 import React, { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import CaseStudyCard from "./ui/CaseStudyCard";
-import { getAllCaseStudies } from "@/lib/caseStudies";
+import { CaseStudy } from "@/types/caseStudy";
 
-export default function DesktopCarousel() {
-  // Get case studies from data
-  const caseStudies = getAllCaseStudies().map((cs) => ({
+interface DesktopCarouselProps {
+  caseStudies: CaseStudy[];
+}
+
+export default function DesktopCarousel({ caseStudies }: DesktopCarouselProps) {
+  // Map case studies to the format expected by CaseStudyCard if needed
+  // But CaseStudyCard likely expects specific props.
+  // Let's check CaseStudyCard props usage in the original file.
+  // Original usage:
+  // title={study.title}
+  // videoUrl={study.videoSrc} (mapped from heroVideo)
+  // href={study.href} (mapped from slug)
+  // carouselData={study.carouselData}
+
+  const items = caseStudies.map((cs) => ({
     title: cs.title,
     imgSrc: cs.heroImage,
     videoSrc: cs.heroVideo,
@@ -37,7 +49,7 @@ export default function DesktopCarousel() {
           {/* Horizontal Moving Track */}
           <motion.div style={{ x }} className="flex gap-8">
             <div className="w-12 shrink-0" />
-            {caseStudies.map((study, index) => (
+            {items.map((study, index) => (
               // Each slide
               <div className="relative h-[80vh] w-[40vw] shrink-0" key={index}>
                 <div className="h-full w-full transition-transform duration-500">

@@ -52,13 +52,19 @@ const DisplayCard = memo(function DisplayCard({
             />
           ) : (
             <>
-              <Image
-                src={imageUrl}
-                alt={title}
-                layout="fill"
-                objectFit="cover"
-                className="z-0"
-              />
+              {imageUrl ? (
+                <Image
+                  src={imageUrl}
+                  alt={title}
+                  layout="fill"
+                  objectFit="cover"
+                  className="z-0"
+                />
+              ) : (
+                <div className="w-full h-full flex items-center justify-center bg-gray-200 text-gray-400">
+                  No Image
+                </div>
+              )}
 
               {readTime && (
                 <div className="absolute bottom-3 right-3 bg-white/70 rounded-full px-3 py-1 backdrop-blur-sm">

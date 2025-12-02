@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
-import { fontSatoshi, fontAlpino, fontHelvetica } from "./fonts";
+import { fontHelvetica } from "./fonts";
 import "./globals.css";
 import SplinePrefetcher from "@/components/SplinePrefetcher";
 import SmoothScrolling from "@/components/SmoothScrolling";
+import { ToastProvider } from "@/components/providers/ToastProvider";
+
+import { AuthProvider } from "@/components/providers/AuthProvider";
 
 export const metadata: Metadata = {
   title: "Flexiana AI",
@@ -15,17 +18,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
 
       </head>
       <body
-        className={`${fontSatoshi.variable} ${fontAlpino.variable} ${fontHelvetica.variable} antialiased`}
+        className={`${fontHelvetica.variable} antialiased`}
         suppressHydrationWarning={true}
       >
-        <SmoothScrolling />
-        {children}
-        <SplinePrefetcher />
+        <AuthProvider>
+          <SmoothScrolling />
+          {children}
+          <SplinePrefetcher />
+          <ToastProvider />
+        </AuthProvider>
       </body>
     </html>
   );

@@ -8,10 +8,10 @@ import BlogContent from "@/components/blog/BlogContent";
 import RelatedArticles from "@/components/blog/RelatedArticles";
 import CTASection from "@/components/CTASection";
 import {
-  getBlogPostBySlug,
+  getBlogBySlug,
   getRelatedArticles,
-  getAllBlogPosts,
-} from "@/lib/blog";
+  getBlogs,
+} from "@/app/actions/blog";
 
 interface BlogDetailPageProps {
   params: Promise<{
@@ -24,7 +24,7 @@ export async function generateMetadata({
   params,
 }: BlogDetailPageProps): Promise<Metadata> {
   const { slug } = await params;
-  const post = getBlogPostBySlug(slug);
+  const post = await getBlogBySlug(slug);
 
   if (!post) {
     return {
@@ -73,9 +73,10 @@ export async function generateMetadata({
 }
 
 // Generate static params for all blog posts at build time
-export function generateStaticParams() {
-  const posts = getAllBlogPosts();
-  return posts.map((post) => ({
+export async function generateStaticParams() {
+  // Fetch all blogs for static generation (using a large limit)
+  const { blogs } = await getBlogs(1, 1000);
+  return blogs.map((post) => ({
     slug: post.slug,
   }));
 }
@@ -85,7 +86,7 @@ export const revalidate = 60;
 
 export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
   const { slug } = await params;
-  const post = getBlogPostBySlug(slug);
+  const post = await getBlogBySlug(slug);
 
   // If post not found, trigger 404
   if (!post) {
@@ -93,7 +94,7 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
   }
 
   // Get related articles
-  const relatedArticles = getRelatedArticles(slug, 4);
+  const relatedArticles = await getRelatedArticles(slug, 4);
 
   // Structured data for SEO (JSON-LD)
   const structuredData = {
@@ -119,7 +120,7 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
   };
 
   return (
-    <main className="min-h-screen relative bg-white">
+    <div className="min-h-screen relative bg-white">
       {/* Structured Data */}
       <script
         type="application/ld+json"
@@ -153,6 +154,6 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
 
       {/* CTA Section */}
       {/* <CTASection imgSrc="" /> */}
-    </main>
+    </div>
   );
 }

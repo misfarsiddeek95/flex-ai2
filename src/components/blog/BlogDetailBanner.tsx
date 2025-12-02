@@ -19,15 +19,19 @@ export default function BlogDetailBanner({
 }: BlogDetailBannerProps) {
   return (
     <section className="relative w-full overflow-hidden h-[300px] md:h-[400px] lg:h-[500px]">
-      {/* Background Image */}
-      <Image
-        src={imageUrl}
-        alt={imageAlt}
-        fill
-        className="object-cover z-0"
-        priority
-        sizes="100vw"
-      />
+      {/* Background Image or Fallback */}
+      {imageUrl ? (
+        <Image
+          src={imageUrl}
+          alt={imageAlt}
+          fill
+          className="object-cover z-0"
+          priority
+          sizes="100vw"
+        />
+      ) : (
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 z-0" />
+      )}
 
       {/* Gradient Overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/40 z-10" />

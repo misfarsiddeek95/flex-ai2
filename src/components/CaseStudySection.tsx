@@ -2,8 +2,11 @@ import MobileCarousel from "./MobileCarousel";
 import DesktopCarousel from "./DesktopCarousel";
 import TagButton from "./ui/TagButton";
 import GradientText from "./ui/GradientText";
+import { getFeaturedCaseStudies } from "@/app/actions/case-study";
 
-export default function CaseStudySection() {
+export default async function CaseStudySection() {
+  const caseStudies = await getFeaturedCaseStudies();
+
   return (
     <section className="bg-white py-16 md:pt-24 md:pb-0">
       {/* Header & Mobile Carousel Container */}
@@ -22,11 +25,11 @@ export default function CaseStudySection() {
           </GradientText>
         </div>
 
-        <MobileCarousel />
+        <MobileCarousel caseStudies={caseStudies} />
       </div>
 
       <div className="hidden md:block pl-4 sm:pl-8">
-        <DesktopCarousel />
+        <DesktopCarousel caseStudies={caseStudies} />
       </div>
     </section>
   );
