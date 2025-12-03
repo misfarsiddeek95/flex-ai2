@@ -13,7 +13,7 @@ export default function HeroBanner() {
       />
 
       {/* This dark overlay makes the white text easier to read. */}
-      <div className="absolute inset-0 bg-black/50 z-1"></div>
+      {/* <div className="absolute inset-0 bg-black/50 z-1"></div> */}
 
       {/* 2. ADDED pb-24 md:pb-32 to the text wrapper */}
       {/* <div className="relative z-10 pb-24 md:pb-32">

@@ -269,6 +269,7 @@ export function CaseStudyForm({ initialData, isNew }: CaseStudyFormProps) {
                                 <RichTextEditor
                                     value={field.value || ""}
                                     onChange={field.onChange}
+                                    uploadType="case-study"
                                 />
                             )}
                         />

@@ -229,6 +229,7 @@ export function BlogForm({ initialData, isNew }: BlogFormProps) {
                                 <RichTextEditor
                                     value={field.value || ""}
                                     onChange={field.onChange}
+                                    uploadType="blog"
                                 />
                             )}
                         />

@@ -122,40 +122,41 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
   };
 
   return (
-    <div className="min-h-screen relative bg-white">
+    <>
       {/* Structured Data */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
+      <div className="min-h-screen relative bg-white">
+        {/* Banner Section */}
+        <BlogDetailBanner
+          title={post.title}
+          subtitle={post.subtitle}
+          imageUrl={post.imageUrl}
+          imageAlt={post.imageAlt}
+        />
 
-      {/* Banner Section */}
-      <BlogDetailBanner
-        title={post.title}
-        subtitle={post.subtitle}
-        imageUrl={post.imageUrl}
-        imageAlt={post.imageAlt}
-      />
+        {/* Metadata Section */}
+        <BlogMetadata
+          author={post.author}
+          authorImage={post.authorImage}
+          publishDate={post.publishDate}
+          readTime={post.readTime}
+        />
 
-      {/* Metadata Section */}
-      <BlogMetadata
-        author={post.author}
-        authorImage={post.authorImage}
-        publishDate={post.publishDate}
-        readTime={post.readTime}
-      />
+        {/* Tags Section */}
+        <BlogTags tags={post.tags} />
 
-      {/* Tags Section */}
-      <BlogTags tags={post.tags} />
+        {/* Content Section */}
+        <BlogContent content={post.content} />
 
-      {/* Content Section */}
-      <BlogContent content={post.content} />
+        {/* Related Articles Section */}
+        <RelatedArticles articles={relatedArticles} />
 
-      {/* Related Articles Section */}
-      <RelatedArticles articles={relatedArticles} />
-
-      {/* CTA Section */}
-      {/* <CTASection imgSrc="" /> */}
-    </div>
+        {/* CTA Section */}
+        {/* <CTASection imgSrc="" /> */}
+      </div>
+    </>
   );
 }

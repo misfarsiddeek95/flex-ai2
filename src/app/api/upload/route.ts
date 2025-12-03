@@ -41,12 +41,12 @@ export async function POST(req: NextRequest) {
         const filepath = path.join(uploadDir, finalFilename);
 
         // Compress and save
-        await sharp(buffer)
+        await sharp(buffer, { animated: true })
             .resize(1200, 1200, { // Max dimensions, maintain aspect ratio
                 fit: "inside",
                 withoutEnlargement: true
             })
-            .webp({ quality: 80 })
+            .webp({ quality: 80, effort: 6 })
             .toFile(filepath);
 
         const url = `/uploads/${type}/${finalFilename}`;
